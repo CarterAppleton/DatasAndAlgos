@@ -10,7 +10,41 @@ import Foundation
 
 print("Hello, World!")
 
-let d: HeapType<Int> = .Max
+/*
+var h = Heap(arr: [1,2,3,6,77,8,4,23,4,5677,89], type: .Min)
 
-var h = Heap(arr: [1,2,3,6,77,8,4,23,4,5677,89], type: d)
-print(h.array())
+print(Array(h))
+
+for v in h {
+    print(v)
+}
+ */
+
+/*(
+var s = SplayTree(item: 1)
+print(Array(s))
+s = s.insert(2)
+print(Array(s))
+s = s.insert(3)
+print(Array(s))
+s = s.insert(5)
+print(Array(s))
+s = s.insert(3)
+print(Array(s))
+ */
+
+var s = SplayTree(item: 2)
+print(s.treeOrder(s))
+s = s.insert(1)
+print(s.treeOrder(s))
+s = s.insert(2)
+print(s.treeOrder(s))
+
+s = s.insert(2)
+print(s.treeOrder(s))
+s = s.insert(5)
+print(s.treeOrder(s))
+s = s.insert(0)
+print(s.treeOrder(s))
+s = s.insert(3)
+print(Array(s))
