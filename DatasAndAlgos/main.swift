@@ -6,45 +6,16 @@
 //  Copyright © 2016 Carter Appleton. All rights reserved.
 //
 
-import Foundation
+print("Hello, Data Structures and Algorithms!")
 
-print("Hello, World!")
+let b = [1,2,3,6,77,8,4,23,4,5677,89,34,5,7765,345,2,34,45,56,457,6,8,5,456,432,3,4,5,56,7,64,32,1,21,1,2,3,4,45,7,3]
 
-/*
-var h = Heap(arr: [1,2,3,6,77,8,4,23,4,5677,89], type: .Min)
+var s = SplayTree(b)
+var h = Heap(b, type: .Min)
 
+print(Array(s))
 print(Array(h))
+print(b.sort())
+print(b.mergeSort())
+print(b.radixSort())
 
-for v in h {
-    print(v)
-}
- */
-
-/*(
-var s = SplayTree(item: 1)
-print(Array(s))
-s = s.insert(2)
-print(Array(s))
-s = s.insert(3)
-print(Array(s))
-s = s.insert(5)
-print(Array(s))
-s = s.insert(3)
-print(Array(s))
- */
-
-var s = SplayTree(item: 2)
-print(s.treeOrder(s))
-s = s.insert(1)
-print(s.treeOrder(s))
-s = s.insert(2)
-print(s.treeOrder(s))
-
-s = s.insert(2)
-print(s.treeOrder(s))
-s = s.insert(5)
-print(s.treeOrder(s))
-s = s.insert(0)
-print(s.treeOrder(s))
-s = s.insert(3)
-print(Array(s))

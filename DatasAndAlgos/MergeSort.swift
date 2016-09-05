@@ -6,28 +6,32 @@
 //  Copyright © 2016 Carter Appleton. All rights reserved.
 //
 
+/**
+ 
+ Extend Array so it supports MergeSort
+ 
+ */
 extension Array where Element : Comparable {
     
+    /**
+     
+     Return an Array of the sorted items of source.
+     
+     - returns:
+     Sorted array of source.
+     */
     func mergeSort() -> [Element] {
         
-        func mergeSort(arr: [Element]) -> [Element] {
-            
-            if arr.count < 2 {
-                return arr
-            }
-            
-            let left = Array(arr[0..<(arr.count / 2)])
-            let right = Array(arr[(arr.count / 2)..<arr.count])
-            
-            let leftSorted: [Element] = mergeSort(left)
-            let rightSorted: [Element] = mergeSort(right)
-            
+        /// Merge two arrays with respect to ordering
+        func mergeSortedArrays(one: [Element], _ two: [Element]) -> [Element] {
             var (l, r) = (0, 0)
             var ret = [Element]()
-            while l < leftSorted.count && r < rightSorted.count {
+            
+            // While both arrays have elements, add the next lowest element
+            while l < one.count && r < two.count {
                 
-                let left: Element = leftSorted[l]
-                let right: Element = rightSorted[r]
+                let left: Element = one[l]
+                let right: Element = two[r]
                 
                 if left < right {
                     ret += [left]
@@ -38,13 +42,30 @@ extension Array where Element : Comparable {
                 }
             }
             
-            if l < leftSorted.count {
-                ret += leftSorted.dropFirst(l)
-            } else if r < rightSorted.count {
-                ret += rightSorted.dropFirst(r)
-            }
+            // Add whatever is remaining, either one array will have elements or none will
+            ret += one.dropFirst(l)
+            ret += two.dropFirst(r)
             
             return ret
+        }
+        
+        func mergeSort(arr: [Element]) -> [Element] {
+            
+            // If the array is only one element or less it's sorted
+            if arr.count < 2 {
+                return arr
+            }
+            
+            // Split the array in two
+            let left = Array(arr[0..<(arr.count / 2)])
+            let right = Array(arr[(arr.count / 2)..<arr.count])
+            
+            // Sort both sides
+            let leftSorted: [Element] = mergeSort(left)
+            let rightSorted: [Element] = mergeSort(right)
+            
+            // Combine arrays, keeping them sorted, and return
+            return mergeSortedArrays(leftSorted, rightSorted)
         }
         
         return mergeSort(self)

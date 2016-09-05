@@ -63,9 +63,9 @@ struct Heap<E: Comparable> {
         - arr: Elements to initialize the heap with.
         - type: The type of heap to create, either Min or Max.
      */
-    init(arr: [E], type: HeapType<E>) {
+    init<S : SequenceType where S.Generator.Element == E>(_ items: S, type: HeapType<E>) {
         self.comparison = type.comparison()
-        self.insert(arr)
+        self.insert(items)
     }
     
     /**
@@ -87,7 +87,7 @@ struct Heap<E: Comparable> {
      - parameters:
         - items: The items to insert in the heap.
      */
-    mutating func insert(items: [E]) {
+    mutating func insert<S : SequenceType where S.Generator.Element == E>(items: S) {
         for item in items {
             self.insert(item)
         }
@@ -164,6 +164,34 @@ struct Heap<E: Comparable> {
      */
     mutating private func percolateDown(index: Int) {
         
+        /**
+         
+         Chooses the correct child's index to swap to. The correct child's index must exist in the heap. If both the left and right children exist, then the comparitive function is used to choose the correct child.
+         
+         - returns:
+         The index of the correct child, if such a child exists. Nil if there are no such children.
+         
+         - parameters:
+         - left: Index of the left child to check
+         - right: Index of the right child to check
+         */
+        func chooseChild(left: Int, right: Int) -> Int? {
+            
+            if left >= self.heap.count && right >= self.heap.count {
+                return nil
+            }
+            
+            if left >= self.heap.count {
+                return right
+            }
+            
+            if right >= self.heap.count {
+                return left
+            }
+            
+            return self.comparison(self.heap[left], self.heap[right]) ? left : right
+        }
+        
         let (parent, leftChild, rightChild) = (index, index << 1, (index << 1) + 1)
         if let child = chooseChild(leftChild, right: rightChild) {
             if self.comparison(self.heap[child],self.heap[parent]) {
@@ -171,34 +199,6 @@ struct Heap<E: Comparable> {
                 percolateDown(child)
             }
         }
-    }
-    
-    /**
-     
-     Chooses the correct child's index to swap to. The correct child's index must exist in the heap. If both the left and right children exist, then the comparitive function is used to choose the correct child.
-     
-     - returns:
-     The index of the correct child, if such a child exists. Nil if there are no such children.
-     
-     - parameters:
-        - left: Index of the left child to check
-        - right: Index of the right child to check
-     */
-    private func chooseChild(left: Int, right: Int) -> Int? {
-        
-        if left >= self.heap.count && right >= self.heap.count {
-            return nil
-        }
-        
-        if left >= self.heap.count {
-            return right
-        }
-        
-        if right >= self.heap.count {
-            return left
-        }
-        
-        return self.comparison(self.heap[left], self.heap[right]) ? left : right
     }
 }
 
