@@ -60,52 +60,55 @@ class SplayTree<E: Comparable>  {
      
      Insert a given item into the SplayTree.
      
+     - returns:
+     True if the insertion was successful. False if item already exists.
+     
      - parameters:
         - item: Item to add to the SplayTree
      */
-    func insert(item: E) {
+    func insert(item: E) -> Bool {
         
-        func insert(x: SplayTree, p: SplayTree?, g: SplayTree?, gg: SplayTree?) -> (SplayTree, SplayTree?) {
-            
-            // 1. Insert recursively until p is nil (and so x is added)
-            // 2. If spl == nil: splay - we must be the parent of x or the great
-            //                    grandparent of a previous splay. Return the
-            //                    new tree and the next node to splay at.
-            //    otherwise    : don't splay - we are in a previous splay. If
-            //                    the parent is the next splay target, flag this
-            //                    by returning (tree,nil). Otherwise (tree,spl).
-            if let p = p {
-                if x.item > p.item {
-                    let (tree, spl) = insert(x, p: p.rightNode, g: p, gg: g)
-                    if spl == nil {
-                        p.rightNode = tree
-                        return (splay(p.rightNode!, p: p, g: g),g)
-                    } else {
-                        return (tree, p === spl ? nil : spl)
+        func insert(tree: SplayTree, intoTree mainTree: SplayTree?) -> Bool {
+            if let mainTree = mainTree {
+                if tree.item > mainTree.item {
+                    if let right = mainTree.rightNode {
+                        return insert(tree, intoTree: right)
                     }
-                } else {
-                    let (tree, spl) = insert(x, p: p.leftNode, g: p, gg: g)
-                    if spl == nil {
-                        p.leftNode = tree
-                        return (splay(p.leftNode!, p: p, g: g),g)
-                    } else {
-                        return (tree, p === spl ? nil : spl)
+                    mainTree.rightNode = tree
+                    return true
+                } else if tree.item < mainTree.item {
+                    if let left = mainTree.leftNode {
+                        return insert(tree, intoTree: left)
                     }
+                    mainTree.leftNode = tree
+                    return true
                 }
             }
-            
-            // No parent, so x is the only tree
-            return (x, nil)
+            return false
         }
         
         // Construct x so it doesn't call insert (so it doesn't act like a head)
-        let x = SplayTree()
+        let x: SplayTree<E> = SplayTree()
         x.item = item
         
-        let (tree, _) = insert(x, p: self.leftNode, g: nil, gg: nil)
+        // If there are no nodes in the tree, add one
+        if self.leftNode == nil {
+            self.leftNode = x
+            return true
+        }
         
-        // We are head node, so use leftNode to point to our SplayTree
-        self.leftNode = tree
+        // On successful insert, splay inserted node to the root
+        if insert(x, intoTree: self.leftNode) {
+            let tree = self.splay(item, tree: self.leftNode)
+            if let tree = tree {
+                // We are head node, so use leftNode to point to our SplayTree
+                self.leftNode = tree
+                return true
+            }
+        }
+        
+        // Node already exists in tree
+        return false
     }
     
     /**
@@ -113,7 +116,7 @@ class SplayTree<E: Comparable>  {
      Insert items into the SplayTree.
      
      - parameters:
-        - items: Items to add to the SplayTree
+     - items: Items to add to the SplayTree
      */
     func insert<S : SequenceType where S.Generator.Element == E>(items: S) {
         for item in items {
@@ -123,81 +126,90 @@ class SplayTree<E: Comparable>  {
     
     /**
      
-     Splay the target item (x) to the root.
-     
-     - returns:
-     A new SplayTree with x at the root.
+     Removes and returns the item from the tree, or nil if the item doesn't exist.
      
      - parameters:
-        - x: Target node of the splay operation
-        - p: Parent of the target
-        - g: Grandparent of the target, if it exists
+        - item: Item to remove from the SplayTree
      */
-    private func splay(x: SplayTree, p: SplayTree, g: SplayTree?) -> SplayTree {
+    
+    func join(leftTree: SplayTree?, rightTree: SplayTree?) -> SplayTree? {
         
-        if let g = g {
+        if let leftMaxNode = self.maxNode(leftTree) {
             
-            // Zig zig on the left
-            if p === g.leftNode && x === p.leftNode {
-                
-                g.leftNode = p.rightNode
-                p.rightNode = g
-                p.leftNode = x.rightNode
-                x.rightNode = p
-                
-            }
+            // Splay the value in the left tree to the root
+            let tree = self.splay(leftMaxNode.item!, tree: leftTree)
             
-            // Zig zig on the right
-            else if p === g.rightNode && x === p.rightNode {
-                
-                g.rightNode = p.leftNode
-                p.leftNode = g
-                p.rightNode = x.leftNode
-                x.leftNode = p
-                
-            }
+            // Right node must be nil as the root is maximal, so this is safe
+            tree!.rightNode = rightTree
             
-            // Zig zag right left
-            else if p === g.leftNode && x === p.rightNode {
-                
-                g.leftNode = x.rightNode
-                x.rightNode = g
-                p.rightNode = x.leftNode
-                x.leftNode = p
-                
-            }
-            
-            // Zig zag left right
-            else if p === g.rightNode && x === p.leftNode {
-            
-                g.rightNode = x.leftNode
-                x.leftNode = g
-                p.leftNode = x.rightNode
-                x.rightNode = p
-                
-            }
+            return tree
         }
         
-        // Zig step, p is the root
-        else {
-            
-            // Zig left
-            if x === p.leftNode {
-
-                p.leftNode = x.rightNode
-                x.rightNode = p
-                
-            // Zig right
-            } else {
-                
-                p.rightNode = x.leftNode
-                x.leftNode = p
-
-            }
-            
+        return rightTree
+    }
+    
+    /**
+     
+     Remove a given item from the SplayTree.
+     
+     - returns:
+     The item if removal was successful. Nil if item doesn't exist.
+     
+     - parameters:
+        - item: Item to remove from the SplayTree
+     */
+    func remove(item: E) -> E? {
+        
+        // Splay the node equal to x to the root
+        let tree = self.splay(item, tree: self.leftNode)
+        
+        // Splay only fails if tree doesn't exist. Join the right and left trees
+        if let tree = tree {
+            self.leftNode = self.join(tree.leftNode, rightTree: tree.rightNode)
+            return tree.item!
         }
         
-        return x
+        return nil
+    }
+    
+    /**
+     
+     Remove given items from the SplayTree.
+     
+     - parameters:
+        - item: Items to remove from the SplayTree
+     */
+    func remove<S : SequenceType where S.Generator.Element == E>(items: S) {
+        for item in items {
+            self.remove(item)
+        }
+    }
+    
+    /// Recursive helper for maxItem()
+    /// Returns max item in the tree or nil if tree is empty
+    private func maxNode(tree: SplayTree?) -> SplayTree? {
+        if let tree = tree {
+            if let element = maxNode(tree.rightNode) {
+                return element
+            }
+            return tree
+        }
+        
+        return nil
+    }
+    
+    /**
+     
+     Returns the maximum item in the tree, if it exists.
+     
+     - returns:
+     Max item E in the tree or nil if the tree is empty.
+     */
+    func maxItem() -> E? {
+        if let node = self.maxNode(self.leftNode) {
+            return node.item
+        }
+        return nil
     }
     
     /**
@@ -257,6 +269,125 @@ class SplayTree<E: Comparable>  {
         }
         
         return inOrder(self.leftNode)
+    }
+    
+    /**
+     
+     Recursively splay the node with the target item to the root.
+     
+     - returns:
+     A tree with the node holding the item splayed to the root, or nil if such a node could not be found.
+     
+     - parameters:
+     - item: Item (or equivalent item) of the node to splay to the root
+     - tree: Tree to search in and splay
+     */
+    private func splay(item: E, tree: SplayTree?) -> SplayTree? {
+        
+        func splayRecursive(x: E, p: SplayTree?, g: SplayTree?, gg: SplayTree?) -> (SplayTree?, SplayTree?) {
+            
+            // 1. Splay recursively until p is nil (and so x is added)
+            // 2. If spl == nil: splay - we must be the parent of x or the great
+            //                    grandparent of a previous splay. Return the
+            //                    new tree and the next node to splay at.
+            //    otherwise    : don't splay - we are in a previous splay. If
+            //                    the parent is the next splay target, flag this
+            //                    by returning (tree,nil). Otherwise (tree,spl).
+            if let p = p {
+                if x > p.item {
+                    let (tree, spl) = splayRecursive(x, p: p.rightNode, g: p, gg: g)
+                    if tree == nil {
+                        return (nil, nil)
+                    } else if spl == nil {
+                        p.rightNode = tree
+                        return (splayTrees(p.rightNode!, p: p, g: g),g)
+                    } else {
+                        return (tree, p === spl ? nil : spl)
+                    }
+                } else if x < p.item {
+                    let (tree, spl) = splayRecursive(x, p: p.leftNode, g: p, gg: g)
+                    if tree == nil {
+                        return (nil, nil)
+                    } else if spl == nil {
+                        p.leftNode = tree
+                        return (splayTrees(p.leftNode!, p: p, g: g),g)
+                    } else {
+                        return (tree, p === spl ? nil : spl)
+                    }
+                } else {
+                    return (p, nil)
+                }
+            }
+            return (nil, nil)
+        }
+        
+        /**
+         
+         Splay the target item (x) to the root.
+         
+         - returns:
+         A new SplayTree with x at the root.
+         
+         - parameters:
+         - x: Target node of the splay operation
+         - p: Parent of the target
+         - g: Grandparent of the target, if it exists
+         */
+        func splayTrees(x: SplayTree, p: SplayTree, g: SplayTree?) -> SplayTree {
+            
+            if let g = g {
+                // Zig zig on the left
+                if p === g.leftNode && x === p.leftNode {
+                    g.leftNode = p.rightNode
+                    p.rightNode = g
+                    p.leftNode = x.rightNode
+                    x.rightNode = p
+                }
+                    
+                    // Zig zig on the right
+                else if p === g.rightNode && x === p.rightNode {
+                    g.rightNode = p.leftNode
+                    p.leftNode = g
+                    p.rightNode = x.leftNode
+                    x.leftNode = p
+                }
+                    
+                    // Zig zag right left
+                else if p === g.leftNode && x === p.rightNode {
+                    g.leftNode = x.rightNode
+                    x.rightNode = g
+                    p.rightNode = x.leftNode
+                    x.leftNode = p
+                }
+                    
+                    // Zig zag left right
+                else if p === g.rightNode && x === p.leftNode {
+                    g.rightNode = x.leftNode
+                    x.leftNode = g
+                    p.leftNode = x.rightNode
+                    x.rightNode = p
+                }
+            }
+                
+                // Zig step, p is the root
+            else {
+                
+                // Zig left
+                if x === p.leftNode {
+                    p.leftNode = x.rightNode
+                    x.rightNode = p
+                    
+                    // Zig right
+                } else {
+                    p.rightNode = x.leftNode
+                    x.leftNode = p
+                }
+            }
+            return x
+        }
+        
+        let (tree, _) = splayRecursive(item, p: tree, g: nil, gg: nil)
+        return tree
     }
 }
 
