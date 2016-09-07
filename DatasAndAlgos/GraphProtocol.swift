@@ -6,8 +6,36 @@
 //  Copyright © 2016 Carter Appleton. All rights reserved.
 //
 
+struct GraphEdge<E: Hashable> : Comparable {
+    var originVertex: E
+    var targetVertex: E
+    var weight: Int
+    init(origin: E, target: E, weight: Int) {
+        self.originVertex = origin
+        self.targetVertex = target
+        self.weight = weight
+    }
+}
+
+func ==<T>(lhs: GraphEdge<T>, rhs: GraphEdge<T>) -> Bool {
+    return lhs.weight == rhs.weight
+}
+
+func <<T>(lhs: GraphEdge<T>, rhs: GraphEdge<T>) -> Bool {
+    return lhs.weight < rhs.weight
+}
+
 protocol Graph {
-    associatedtype T : Equatable
+    associatedtype T : Hashable
+    
+    /// Whether or not the graph is directed
+    var undirected: Bool { get }
+    
+    /// Initialize as directed or not
+    init(undirected: Bool)
+    
+    /// Initialize as directed or not with vertices
+    init(undirected: Bool, withVertices vertices: [T])
     
     /// Add a vertex
     mutating func add(vertex vertex: T)
@@ -21,7 +49,7 @@ protocol Graph {
     /// Add an edge with given weight
     mutating func add(edgeFromVertex fromVertex: T, toVertex: T, withWeight weight: Int) -> Bool
     /// Add multiples edges with weights
-    mutating func add(edges edges: [(startVertex: T, endVertex: T, weight: Int)]) -> Bool
+    mutating func add(edges edges: [GraphEdge<T>]) -> Bool
     /// Remove a given edge
     /// True if the edge existed, false if no such edge in graph
     mutating func remove(edgeFromVertex fromVertex: T, toVertex: T) -> Bool
@@ -34,9 +62,10 @@ protocol Graph {
     
     
     /// Add multiple vertices and edges
-    mutating func add(vertices vertices: [T], withEdges edges: [(startVertex: T, endVertex: T, weight: Int)]) -> Bool
+    mutating func add(vertices vertices: [T], withEdges edges: [GraphEdge<T>]) -> Bool
     
-    
+    /// Any vertex in the graph
+    func anyVertex() -> T?
     /// All vertices
     func vertices() -> [T]
     /// All vertices adjacent to a given vertex
@@ -45,11 +74,11 @@ protocol Graph {
     
     
     /// All edges
-    func edges() -> [(startVertex: T, endVertex: T, weight: Int)]
+    func edges() -> [GraphEdge<T>]
     /// All edges originating from a given vertex
     /// Array of edges, nil if no such origin vertex exists
-    func edges(fromVertex vertex: T) -> [(startVertex: T, endVertex: T, weight: Int)]?
+    func edges(fromVertex vertex: T) -> [GraphEdge<T>]?
     /// All edges pointing to a given vertex
     /// Array of edges, nil if no such vertex exists
-    func edges(toVertex vertex: T) -> [(startVertex: T, endVertex: T, weight: Int)]?
+    func edges(toVertex vertex: T) -> [GraphEdge<T>]?
 }
