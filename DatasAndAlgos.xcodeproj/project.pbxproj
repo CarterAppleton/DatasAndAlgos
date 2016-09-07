@@ -12,6 +12,8 @@
 		ADB000211D7CDA1100E95028 /* MergeSort.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB000201D7CDA1100E95028 /* MergeSort.swift */; };
 		ADB000251D7CDA7A00E95028 /* SplayTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB000241D7CDA7A00E95028 /* SplayTree.swift */; };
 		ADB000271D7CE78F00E95028 /* Heap.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB000261D7CE78F00E95028 /* Heap.swift */; };
+		ADB000291D7FB3E200E95028 /* AdjacencyListGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB000281D7FB3E200E95028 /* AdjacencyListGraph.swift */; };
+		ADB0002B1D7FC96E00E95028 /* GraphProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB0002A1D7FC96E00E95028 /* GraphProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -33,6 +35,8 @@
 		ADB000201D7CDA1100E95028 /* MergeSort.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MergeSort.swift; sourceTree = "<group>"; };
 		ADB000241D7CDA7A00E95028 /* SplayTree.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplayTree.swift; sourceTree = "<group>"; };
 		ADB000261D7CE78F00E95028 /* Heap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Heap.swift; sourceTree = "<group>"; };
+		ADB000281D7FB3E200E95028 /* AdjacencyListGraph.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdjacencyListGraph.swift; sourceTree = "<group>"; };
+		ADB0002A1D7FC96E00E95028 /* GraphProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +73,8 @@
 				ADB0001E1D7CD89E00E95028 /* RadixSort.swift */,
 				ADB000201D7CDA1100E95028 /* MergeSort.swift */,
 				ADB000241D7CDA7A00E95028 /* SplayTree.swift */,
+				ADB000281D7FB3E200E95028 /* AdjacencyListGraph.swift */,
+				ADB0002A1D7FC96E00E95028 /* GraphProtocol.swift */,
 				ADB000261D7CE78F00E95028 /* Heap.swift */,
 			);
 			path = DatasAndAlgos;
@@ -136,6 +142,8 @@
 				ADB0001F1D7CD89E00E95028 /* RadixSort.swift in Sources */,
 				ADB000181D7CD88E00E95028 /* main.swift in Sources */,
 				ADB000251D7CDA7A00E95028 /* SplayTree.swift in Sources */,
+				ADB000291D7FB3E200E95028 /* AdjacencyListGraph.swift in Sources */,
+				ADB0002B1D7FC96E00E95028 /* GraphProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
