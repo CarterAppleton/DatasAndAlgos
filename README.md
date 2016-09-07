@@ -13,8 +13,8 @@ Data Structures
  - AdjacencyListGraph
 
 History:
-09/06/16 - Graph & AdjacencyListGraph
-09/05/16 - SplayTree
-09/04/16 - Heap
-09/03/16 - MergeSort
-09/02/16 - RadixSort
+- 09/06/16 - Graph & AdjacencyListGraph
+- 09/05/16 - SplayTree
+- 09/04/16 - Heap
+- 09/03/16 - MergeSort
+- 09/02/16 - RadixSort
