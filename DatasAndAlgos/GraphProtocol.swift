@@ -6,25 +6,6 @@
 //  Copyright © 2016 Carter Appleton. All rights reserved.
 //
 
-struct GraphEdge<E: Hashable> : Comparable {
-    var originVertex: E
-    var targetVertex: E
-    var weight: Int
-    init(origin: E, target: E, weight: Int) {
-        self.originVertex = origin
-        self.targetVertex = target
-        self.weight = weight
-    }
-}
-
-func ==<T>(lhs: GraphEdge<T>, rhs: GraphEdge<T>) -> Bool {
-    return lhs.weight == rhs.weight
-}
-
-func <<T>(lhs: GraphEdge<T>, rhs: GraphEdge<T>) -> Bool {
-    return lhs.weight < rhs.weight
-}
-
 protocol Graph {
     associatedtype T : Hashable
     
@@ -81,4 +62,47 @@ protocol Graph {
     /// All edges pointing to a given vertex
     /// Array of edges, nil if no such vertex exists
     func edges(toVertex vertex: T) -> [GraphEdge<T>]?
+}
+
+
+/// Graph Edge- Comparable by weight to other edges and printable to console
+struct GraphEdge<E: Hashable> : Comparable, CustomStringConvertible {
+    
+    /// The origin of the edge, or one endpoint on an undirected graph
+    var originVertex: E
+    
+    /// The target of the edge, or one endpoint on an undirected graph
+    var targetVertex: E
+    
+    /// The weight of the edge, or 0 if unweighted
+    var weight: Int
+    
+    /// Initialize an unweighted edge
+    init(origin: E, target: E) {
+        self.originVertex = origin
+        self.targetVertex = target
+        self.weight = 0
+    }
+    
+    /// Initialize a weighted edge
+    init(origin: E, target: E, weight: Int) {
+        self.originVertex = origin
+        self.targetVertex = target
+        self.weight = weight
+    }
+    
+    /// Description of the edge, in the form (origin: , target: , weight: )
+    var description: String {
+        return "(o: \(originVertex), t: \(targetVertex), w: \(weight))"
+    }
+}
+
+/// Compare weight of two Graph Edges, True if their weights are the same
+func ==<T>(lhs: GraphEdge<T>, rhs: GraphEdge<T>) -> Bool {
+    return lhs.weight == rhs.weight
+}
+
+/// Compare weight of two Graph Edges, True if left is lighter than right
+func <<T>(lhs: GraphEdge<T>, rhs: GraphEdge<T>) -> Bool {
+    return lhs.weight < rhs.weight
 }

@@ -12,10 +12,51 @@ let b = [1,2,3,6,77,8,4,23,4,5677,89,34,5,7765,345,2,34,45,56,457,6,8,5,456,432,
 
 var s = SplayTree(b)
 
-var h = Heap(b, type: .Min)
+var h = Heap(type: .Min, withItems: b)
 
 print(Array(s))
 print(Array(h))
 print(b.sort())
 print(b.mergeSort())
 print(b.radixSort())
+
+/*
+ 
+Graph A:
+ 
+   2
+ a -- b
+  \   |\      f
+ 4 \ 5| \ 1
+    \ |  \
+      c - e
+    7 | 3
+      d
+ 
+ */
+
+var graphA: AdjacencyListGraph<String> = AdjacencyListGraph(undirected: true)
+graphA.add(vertices: ["a","b","c","d","e","f"],
+          withEdges: [
+            GraphEdge(origin: "a", target: "b", weight: 2),
+            GraphEdge(origin: "a", target: "c", weight: 4),
+            GraphEdge(origin: "b", target: "c", weight: 5),
+            GraphEdge(origin: "b", target: "e", weight: 1),
+            GraphEdge(origin: "c", target: "e", weight: 3),
+            GraphEdge(origin: "c", target: "d", weight: 7)
+    ])
+print(graphA.vertices())
+print(graphA.edges())
+
+var graphAMinSpanningTree = try graphA.minimumSpanningTree()
+print(graphAMinSpanningTree.vertices())
+print(graphAMinSpanningTree.edges())
+
+
+
+
+
+
+
+
+

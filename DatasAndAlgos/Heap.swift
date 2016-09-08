@@ -60,10 +60,10 @@ struct Heap<E: Comparable> {
      A heap filled with the elements in arr.
      
      - parameters:
-        - arr: Elements to initialize the heap with.
         - type: The type of heap to create, either Min or Max.
+        - arr: Elements to initialize the heap with.
      */
-    init<S : SequenceType where S.Generator.Element == E>(_ items: S, type: HeapType<E>) {
+    init<S : SequenceType where S.Generator.Element == E>(type: HeapType<E>, withItems items: S) {
         self.comparison = type.comparison()
         self.insert(items)
     }

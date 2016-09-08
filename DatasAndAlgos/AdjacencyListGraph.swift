@@ -111,6 +111,7 @@ struct AdjacencyListGraph<E: Hashable> : Graph {
             if self.undirected {
                 self.adjacencyList[toVertex]![fromVertex] = weight
             }
+            return true
         }
         return false
     }
@@ -130,7 +131,7 @@ struct AdjacencyListGraph<E: Hashable> : Graph {
         
         // First check that all vertices exist
         for edge in edges {
-            if self.adjacencyList[edge.originVertex] != nil && self.adjacencyList[edge.targetVertex] != nil {
+            if self.adjacencyList[edge.originVertex] == nil || self.adjacencyList[edge.targetVertex] == nil {
                 return false
             }
         }
