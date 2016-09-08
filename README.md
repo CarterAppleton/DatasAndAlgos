@@ -22,12 +22,13 @@ I'm adding a new data structure or algorithm a day [or trying to :)]. Please ema
 
 **Graph Spanning**
 - Prim's Algorithm (Coming soon)
-- Kruskal's Algorithm (Coming soon)
+- Kruskal's Algorithm
 - Borůvka's Algorithm (Coming soon)
 
 ---
 
 **History**
+- 09/07/16 - Kruskal's Algorithm
 - 09/06/16 - Graph & AdjacencyListGraph
 - 09/05/16 - SplayTree
 - 09/04/16 - Heap
