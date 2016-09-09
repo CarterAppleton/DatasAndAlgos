@@ -14,13 +14,13 @@ I'm adding a new data structure or algorithm a day [or trying to :)]. Please ema
  - Pointer Graph (Coming soon)
 - Trie (Coming soon)
 
-**Graph Search**
+**Graph: Search**
 - Depth First Search
 - Breadth First Search (Coming soon)
 - Dijkstra's Algorithm (Coming soon)
 - A* (Coming soon)
 
-**Graph Spanning**
+**Graph: Minimum Spanning Tree**
 - Prim's Algorithm (Coming soon)
 - Kruskal's Algorithm
 - Borůvka's Algorithm (Coming soon)
