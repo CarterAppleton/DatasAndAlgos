@@ -10,12 +10,12 @@ I'm adding a new data structure or algorithm a day [or trying to :)]. Please ema
 - Splay Tree
 - Heap
 - Graph (Protocol)
- - AdjacencyListGraph
- - PointerGraph (Coming soon)
+ - Adjacency List Graph
+ - Pointer Graph (Coming soon)
 - Trie (Coming soon)
 
 **Graph Search**
-- Depth First Search (Coming soon)
+- Depth First Search
 - Breadth First Search (Coming soon)
 - Dijkstra's Algorithm (Coming soon)
 - A* (Coming soon)
@@ -28,9 +28,10 @@ I'm adding a new data structure or algorithm a day [or trying to :)]. Please ema
 ---
 
 **History**
+- 09/07/16 - Depth First Search
 - 09/07/16 - Kruskal's Algorithm
 - 09/06/16 - Graph & AdjacencyListGraph
-- 09/05/16 - SplayTree
+- 09/05/16 - Splay Tree
 - 09/04/16 - Heap
-- 09/03/16 - MergeSort
-- 09/02/16 - RadixSort
+- 09/03/16 - Merge Sort
+- 09/02/16 - Radix Sort
