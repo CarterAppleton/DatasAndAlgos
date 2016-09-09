@@ -6,7 +6,7 @@
 //  Copyright © 2016 Carter Appleton. All rights reserved.
 //
 
-print("Hello, Data Structures and Algorithms!")
+print("Hello, Daily Data Structures and Algorithms!")
 
 let b = [1,2,3,6,77,8,4,23,4,5677,89,34,5,7765,345,2,34,45,56,457,6,8,5,456,432,3,4,5,56,7,64,32,1,21,1,2,3,4,45,7,3]
 
@@ -51,6 +51,12 @@ print(graphA.edges())
 var graphAMinSpanningTree = try graphA.minimumSpanningTree()
 print(graphAMinSpanningTree.vertices())
 print(graphAMinSpanningTree.edges())
+
+print(graphA.depthFirstSearch("a")) // True
+print(graphA.depthFirstSearch("b")) // True
+print(graphA.depthFirstSearch("f")) // True
+print(graphA.depthFirstSearch("d")) // True
+print(graphA.depthFirstSearch("g")) // False
 
 
 
