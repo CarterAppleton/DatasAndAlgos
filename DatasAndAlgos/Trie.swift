@@ -6,7 +6,7 @@
 //  Copyright © 2016 Carter Appleton. All rights reserved.
 //
 
-class Trie {
+struct Trie {
     
     /// Whether or not this Trie is the endpoint for a word
     private var isWord = false
@@ -58,19 +58,13 @@ class Trie {
      - parameters:
         - word: String to add.
      */
-    func add(word: String) {
+    mutating func add(word: String) {
         
         if let firstCharacter = word.characters.first {
             // Grab the first character of the word if it exists
-
-            
-            // If we have a next Trie, tell it to insert the rest of the string
+            // Try to add to the next Trie, otherwise set a new next Trie
             let subString = word.substringFromIndex(word.startIndex.successor())
-            if let nextTrie = self.words[firstCharacter] {
-                nextTrie.add(subString)
-                
-            // Otherwise, create a new trie with the rest of the string
-            } else {
+            if self.words[firstCharacter]?.add(subString) == nil {
                 self.words[firstCharacter] = Trie(withWord: subString)
             }
             
@@ -87,7 +81,7 @@ class Trie {
      - parameters:
         - words: Strings to add.
      */
-    func add<S : SequenceType where S.Generator.Element == String>(words: S) {
+    mutating func add<S : SequenceType where S.Generator.Element == String>(words: S) {
         for word in words {
             self.add(word)
         }
