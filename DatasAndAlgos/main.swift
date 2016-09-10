@@ -11,7 +11,6 @@ print("Hello, Daily Data Structures and Algorithms!")
 let b = [1,2,3,6,77,8,4,23,4,5677,89,34,5,7765,345,2,34,45,56,457,6,8,5,456,432,3,4,5,56,7,64,32,1,21,1,2,3,4,45,7,3]
 
 var s = SplayTree(b)
-
 var h = Heap(type: .Min, withItems: b)
 
 print(Array(s))
@@ -57,6 +56,13 @@ print(graphA.depthFirstSearch("b")) // True
 print(graphA.depthFirstSearch("f")) // True
 print(graphA.depthFirstSearch("d")) // True
 print(graphA.depthFirstSearch("g")) // False
+
+var trie = Trie(["Hello","Daily","Data","Structures"])
+print(trie.contains("Hello"))
+print(trie.contains("World"))
+print(trie.contains(""))
+print(trie.allWords())
+
 
 
 

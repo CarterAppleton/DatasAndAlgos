@@ -15,7 +15,8 @@
 		ADB000291D7FB3E200E95028 /* AdjacencyListGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB000281D7FB3E200E95028 /* AdjacencyListGraph.swift */; };
 		ADB0002B1D7FC96E00E95028 /* GraphProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB0002A1D7FC96E00E95028 /* GraphProtocol.swift */; };
 		ADB0002D1D7FE3D400E95028 /* KruskalsAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB0002C1D7FE3D400E95028 /* KruskalsAlgorithm.swift */; };
-		ADB000441D824BCD00E95028 /* DepthFirstSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB000431D824BCD00E95028 /* DepthFirstSearch.swift */; };
+		ADB000461D82642700E95028 /* Trie.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB000451D82642700E95028 /* Trie.swift */; };
+		ADB000481D8269CE00E95028 /* DepthFirstSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB000471D8269CE00E95028 /* DepthFirstSearch.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -40,7 +41,8 @@
 		ADB000281D7FB3E200E95028 /* AdjacencyListGraph.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdjacencyListGraph.swift; sourceTree = "<group>"; };
 		ADB0002A1D7FC96E00E95028 /* GraphProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphProtocol.swift; sourceTree = "<group>"; };
 		ADB0002C1D7FE3D400E95028 /* KruskalsAlgorithm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KruskalsAlgorithm.swift; sourceTree = "<group>"; };
-		ADB000431D824BCD00E95028 /* DepthFirstSearch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DepthFirstSearch.swift; sourceTree = "<group>"; };
+		ADB000451D82642700E95028 /* Trie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Trie.swift; sourceTree = "<group>"; };
+		ADB000471D8269CE00E95028 /* DepthFirstSearch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DepthFirstSearch.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,10 +78,11 @@
 				ADB000171D7CD88E00E95028 /* main.swift */,
 				ADB0001E1D7CD89E00E95028 /* RadixSort.swift */,
 				ADB000201D7CDA1100E95028 /* MergeSort.swift */,
+				ADB000471D8269CE00E95028 /* DepthFirstSearch.swift */,
 				ADB000241D7CDA7A00E95028 /* SplayTree.swift */,
 				ADB000281D7FB3E200E95028 /* AdjacencyListGraph.swift */,
+				ADB000451D82642700E95028 /* Trie.swift */,
 				ADB0002A1D7FC96E00E95028 /* GraphProtocol.swift */,
-				ADB000431D824BCD00E95028 /* DepthFirstSearch.swift */,
 				ADB0002C1D7FE3D400E95028 /* KruskalsAlgorithm.swift */,
 				ADB000261D7CE78F00E95028 /* Heap.swift */,
 			);
@@ -143,10 +146,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ADB000441D824BCD00E95028 /* DepthFirstSearch.swift in Sources */,
 				ADB000211D7CDA1100E95028 /* MergeSort.swift in Sources */,
 				ADB0002D1D7FE3D400E95028 /* KruskalsAlgorithm.swift in Sources */,
+				ADB000481D8269CE00E95028 /* DepthFirstSearch.swift in Sources */,
 				ADB000271D7CE78F00E95028 /* Heap.swift in Sources */,
+				ADB000461D82642700E95028 /* Trie.swift in Sources */,
 				ADB0001F1D7CD89E00E95028 /* RadixSort.swift in Sources */,
 				ADB000181D7CD88E00E95028 /* main.swift in Sources */,
 				ADB000251D7CDA7A00E95028 /* SplayTree.swift in Sources */,
