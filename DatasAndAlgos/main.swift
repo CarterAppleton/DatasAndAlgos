@@ -10,6 +10,8 @@ print("Hello, Daily Data Structures and Algorithms!")
 
 let b = [1,2,3,6,77,8,4,23,4,5677,89,34,5,7765,345,2,34,45,56,457,6,8,5,456,432,3,4,5,56,7,64,32,1,21,1,2,3,4,45,7,3]
 
+// Splay Tree
+
 var s = SplayTree(b)
 var h = Heap(type: .Min, withItems: b)
 
@@ -18,6 +20,8 @@ print(Array(h))
 print(b.sort())
 print(b.mergeSort())
 print(b.radixSort())
+
+print([1,2,3] == [1,2,4])
 
 /*
  
@@ -57,16 +61,18 @@ print(graphA.depthFirstSearch("f")) // True
 print(graphA.depthFirstSearch("d")) // True
 print(graphA.depthFirstSearch("g")) // False
 
+print(graphA.breadthFirstSearch(forVertex: "a", startingAt: "d")) // True
+print(graphA.breadthFirstSearch(forVertex: "c", startingAt: "a")) // True
+print(graphA.breadthFirstSearch(forVertex: "a", startingAt: "e")) // True
+print(graphA.breadthFirstSearch(forVertex: "e", startingAt: "a")) // True
+print(graphA.breadthFirstSearch(forVertex: "a", startingAt: "f")) // False
+print(graphA.breadthFirstSearch(forVertex: "g", startingAt: "a")) // false
+
 var trie = Trie(["Hello","Daily","Data","Structures"])
 print(trie.contains("Hello"))
 print(trie.contains("World"))
 print(trie.contains(""))
 print(trie.allWords())
-
-
-
-
-
 
 
 

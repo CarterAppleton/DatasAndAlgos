@@ -17,6 +17,10 @@
 		ADB0002D1D7FE3D400E95028 /* KruskalsAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB0002C1D7FE3D400E95028 /* KruskalsAlgorithm.swift */; };
 		ADB000461D82642700E95028 /* Trie.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB000451D82642700E95028 /* Trie.swift */; };
 		ADB000481D8269CE00E95028 /* DepthFirstSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB000471D8269CE00E95028 /* DepthFirstSearch.swift */; };
+		ADE6D01E1D84FF8E00B7716E /* BreadthFirstSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE6D01D1D84FF8E00B7716E /* BreadthFirstSearch.swift */; };
+		ADE6D0201D85011600B7716E /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE6D01F1D85011600B7716E /* Stack.swift */; };
+		ADE6D0221D85011F00B7716E /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE6D0211D85011F00B7716E /* Queue.swift */; };
+		ADE6D0241D8506D600B7716E /* CustomExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE6D0231D8506D600B7716E /* CustomExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -43,6 +47,10 @@
 		ADB0002C1D7FE3D400E95028 /* KruskalsAlgorithm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KruskalsAlgorithm.swift; sourceTree = "<group>"; };
 		ADB000451D82642700E95028 /* Trie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Trie.swift; sourceTree = "<group>"; };
 		ADB000471D8269CE00E95028 /* DepthFirstSearch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DepthFirstSearch.swift; sourceTree = "<group>"; };
+		ADE6D01D1D84FF8E00B7716E /* BreadthFirstSearch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BreadthFirstSearch.swift; sourceTree = "<group>"; };
+		ADE6D01F1D85011600B7716E /* Stack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
+		ADE6D0211D85011F00B7716E /* Queue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
+		ADE6D0231D8506D600B7716E /* CustomExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,8 +84,12 @@
 			isa = PBXGroup;
 			children = (
 				ADB000171D7CD88E00E95028 /* main.swift */,
+				ADE6D0231D8506D600B7716E /* CustomExtensions.swift */,
 				ADB0001E1D7CD89E00E95028 /* RadixSort.swift */,
 				ADB000201D7CDA1100E95028 /* MergeSort.swift */,
+				ADE6D01D1D84FF8E00B7716E /* BreadthFirstSearch.swift */,
+				ADE6D01F1D85011600B7716E /* Stack.swift */,
+				ADE6D0211D85011F00B7716E /* Queue.swift */,
 				ADB000471D8269CE00E95028 /* DepthFirstSearch.swift */,
 				ADB000241D7CDA7A00E95028 /* SplayTree.swift */,
 				ADB000281D7FB3E200E95028 /* AdjacencyListGraph.swift */,
@@ -146,16 +158,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ADE6D0241D8506D600B7716E /* CustomExtensions.swift in Sources */,
 				ADB000211D7CDA1100E95028 /* MergeSort.swift in Sources */,
 				ADB0002D1D7FE3D400E95028 /* KruskalsAlgorithm.swift in Sources */,
 				ADB000481D8269CE00E95028 /* DepthFirstSearch.swift in Sources */,
 				ADB000271D7CE78F00E95028 /* Heap.swift in Sources */,
+				ADE6D0221D85011F00B7716E /* Queue.swift in Sources */,
+				ADE6D0201D85011600B7716E /* Stack.swift in Sources */,
 				ADB000461D82642700E95028 /* Trie.swift in Sources */,
 				ADB0001F1D7CD89E00E95028 /* RadixSort.swift in Sources */,
 				ADB000181D7CD88E00E95028 /* main.swift in Sources */,
 				ADB000251D7CDA7A00E95028 /* SplayTree.swift in Sources */,
 				ADB000291D7FB3E200E95028 /* AdjacencyListGraph.swift in Sources */,
 				ADB0002B1D7FC96E00E95028 /* GraphProtocol.swift in Sources */,
+				ADE6D01E1D84FF8E00B7716E /* BreadthFirstSearch.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

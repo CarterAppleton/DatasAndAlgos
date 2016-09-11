@@ -9,9 +9,9 @@
 extension AdjacencyListGraph {
     
     /// Depth first search
-    func depthFirstSearch(item: E) -> Bool {
+    func depthFirstSearch(item: Vertex) -> Bool {
         
-        func depthFirstSearch(vertex: E, item: E, inout seenVertices: Set<E>) -> Bool {
+        func depthFirstSearch(vertex: Vertex, item: Vertex, inout seenVertices: Set<Vertex>) -> Bool {
             
             seenVertices.insert(vertex)
             
@@ -38,13 +38,13 @@ extension AdjacencyListGraph {
         }
         
         // Keep track of vertices we haven't seen
-        var unseenVertices: Set<E> = Set(self.vertices())
+        var unseenVertices: Set<Vertex> = Set(self.vertices())
         
         // While there are vertices we haven't seen, run depth first search
         //  on the next. For connected graphs, this will only run once.
         while let vertex = unseenVertices.first {
 
-            var seenVertices = Set<E>()
+            var seenVertices = Set<Vertex>()
             
             // Run depth first search starting from this vertex
             if depthFirstSearch(vertex, item: item, seenVertices: &seenVertices) {

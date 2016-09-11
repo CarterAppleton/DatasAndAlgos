@@ -24,10 +24,10 @@ extension AdjacencyListGraph {
         var resultGraph = AdjacencyListGraph(undirected: true)
         
         // Keep all the edges in a heap, sorted by the lightest edge
-        var edgeQueue: Heap<GraphEdge<E>> = Heap(type: .Min, withItems: self.edges())
+        var edgeQueue: Heap<GraphEdge<Vertex>> = Heap(type: .Min, withItems: self.edges())
         
         // Vertices not yet in our result graph
-        var unaddedVertices = Set<E>(self.vertices())
+        var unaddedVertices = Set<Vertex>(self.vertices())
         
         // While there are unchecked edges and vertices to be added, try to add
         //  the edges.

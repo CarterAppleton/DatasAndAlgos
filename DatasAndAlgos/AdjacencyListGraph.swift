@@ -8,11 +8,10 @@
 
 import Foundation
 
-struct AdjacencyListGraph<E: Hashable> : Graph {
-    typealias T = E
+struct AdjacencyListGraph<Vertex: Hashable> : Graph {
     
     /// [Vertex -> [Vertex -> Weight]]
-    private var adjacencyList: [E : [E : Int]] = [E : [E : Int]]()
+    private var adjacencyList: [Vertex : [Vertex : Int]] = [Vertex : [Vertex : Int]]()
     
     /// Directed or not
     var undirected: Bool = true
@@ -42,7 +41,7 @@ struct AdjacencyListGraph<E: Hashable> : Graph {
         - directed: Whether or not the edges are directed
         - vertices: Vertices that should be in the graph.
      */
-    init(undirected: Bool, withVertices vertices: [E]) {
+    init(undirected: Bool, withVertices vertices: [Vertex]) {
         self.undirected = undirected
         self.add(vertices: vertices)
 
@@ -55,9 +54,9 @@ struct AdjacencyListGraph<E: Hashable> : Graph {
      - parameters:
         - vertex: Vertex to be added.
      */
-    mutating func add(vertex vertex: E) {
+    mutating func add(vertex vertex: Vertex) {
         if self.adjacencyList[vertex] == nil {
-            self.adjacencyList[vertex] = [E : Int]()
+            self.adjacencyList[vertex] = [Vertex : Int]()
         }
     }
     
@@ -68,7 +67,7 @@ struct AdjacencyListGraph<E: Hashable> : Graph {
      - parameters:
         - vertices: Vertices to be added.
      */
-    mutating func add(vertices vertices: [E]) {
+    mutating func add(vertices vertices: [Vertex]) {
         for vertex in vertices {
             self.add(vertex: vertex)
         }
@@ -84,7 +83,7 @@ struct AdjacencyListGraph<E: Hashable> : Graph {
      - parameters:
         - vertex: Vertex to be removed.
      */
-    mutating func remove(vertex vertex: E) -> Bool {
+    mutating func remove(vertex vertex: Vertex) -> Bool {
         if self.remove(edgesToVertex: vertex) {
             self.adjacencyList[vertex] = nil
             return true
@@ -105,7 +104,7 @@ struct AdjacencyListGraph<E: Hashable> : Graph {
         - toVertex: Endpoint vertex of the edge.
         - weight: Weight of the edge
      */
-    mutating func add(edgeFromVertex fromVertex: E, toVertex: E, withWeight weight: Int) -> Bool {
+    mutating func add(edgeFromVertex fromVertex: Vertex, toVertex: Vertex, withWeight weight: Int) -> Bool {
         if self.adjacencyList[fromVertex] != nil && self.adjacencyList[toVertex] != nil {
             self.adjacencyList[fromVertex]![toVertex] = weight
             if self.undirected {
@@ -127,7 +126,7 @@ struct AdjacencyListGraph<E: Hashable> : Graph {
         - edges: Edges to add to the graph. Edges are defined as tuples (a,b,w) such that
      a is the origin, b is the endpoint, and w is the weight.
      */
-    mutating func add(edges edges: [GraphEdge<E>]) -> Bool {
+    mutating func add(edges edges: [GraphEdge<Vertex>]) -> Bool {
         
         // First check that all vertices exist
         for edge in edges {
@@ -154,7 +153,7 @@ struct AdjacencyListGraph<E: Hashable> : Graph {
         - fromVertex: Vertex the edge starts at
         - toVertex: Vertex the edge ends at
      */
-    mutating func remove(edgeFromVertex fromVertex: E, toVertex: E) -> Bool {
+    mutating func remove(edgeFromVertex fromVertex: Vertex, toVertex: Vertex) -> Bool {
         if let _ = self.adjacencyList[fromVertex], let _ = self.adjacencyList[toVertex] {
             self.adjacencyList[fromVertex]![toVertex] = nil
             if self.undirected {
@@ -175,7 +174,7 @@ struct AdjacencyListGraph<E: Hashable> : Graph {
      - parameters:
         - vertex: Vertex to remove all edges from
      */
-    mutating func remove(edgesFromVertex vertex: T) -> Bool {
+    mutating func remove(edgesFromVertex vertex: Vertex) -> Bool {
         if let _ = self.adjacencyList[vertex] {
             self.adjacencyList[vertex] = nil
             return true
@@ -193,7 +192,7 @@ struct AdjacencyListGraph<E: Hashable> : Graph {
      - parameters:
         - vertex: Vertex to remove all edges pointing to
      */
-    mutating func remove(edgesToVertex vertex: E) -> Bool {
+    mutating func remove(edgesToVertex vertex: Vertex) -> Bool {
         if let edges = self.edges(toVertex: vertex) {
             for edge in edges {
                 self.remove(edgeFromVertex: edge.originVertex, toVertex: vertex)
@@ -217,7 +216,7 @@ struct AdjacencyListGraph<E: Hashable> : Graph {
         - vertices: Vertices to add
         - edges: Edges to add
      */
-    mutating func add(vertices vertices: [T], withEdges edges: [GraphEdge<E>]) -> Bool {
+    mutating func add(vertices vertices: [Vertex], withEdges edges: [GraphEdge<Vertex>]) -> Bool {
         self.add(vertices: vertices)
         return self.add(edges: edges)
     }
@@ -229,7 +228,7 @@ struct AdjacencyListGraph<E: Hashable> : Graph {
      - returns:
      Arbitrary vertex in the graph.
      */
-    func anyVertex() -> E? {
+    func anyVertex() -> Vertex? {
         return adjacencyList.keys.first
     }
     
@@ -240,7 +239,7 @@ struct AdjacencyListGraph<E: Hashable> : Graph {
      - returns:
      All vertices.
      */
-    func vertices() -> [E] {
+    func vertices() -> [Vertex] {
         return Array(adjacencyList.keys)
     }
     
@@ -254,9 +253,9 @@ struct AdjacencyListGraph<E: Hashable> : Graph {
      - parameters:
         - vertex: Origin vertex
      */
-    func vertices(adjacentTo vertex: E) -> [E]? {
+    func vertices(adjacentTo vertex: Vertex) -> [Vertex]? {
         if let edges = self.adjacencyList[vertex] {
-            return edges.reduce([E](), combine: { $0 + [$1.0]})
+            return edges.reduce([Vertex](), combine: { $0 + [$1.0]})
         }
         return nil
     }
@@ -268,8 +267,8 @@ struct AdjacencyListGraph<E: Hashable> : Graph {
      - returns:
      All edges.
      */
-    func edges() -> [GraphEdge<E>] {
-        var allEdges = [GraphEdge<E>]()
+    func edges() -> [GraphEdge<Vertex>] {
+        var allEdges = [GraphEdge<Vertex>]()
         for (vertex, _) in self.adjacencyList {
             allEdges += self.edges(fromVertex: vertex)!
         }
@@ -287,8 +286,8 @@ struct AdjacencyListGraph<E: Hashable> : Graph {
      - parameters:
         - vertices: Vertex for the edges to originate from.
      */
-    func edges(fromVertex vertex: E) -> [GraphEdge<E>]? {
-        var edges = [GraphEdge<E>]()
+    func edges(fromVertex vertex: Vertex) -> [GraphEdge<Vertex>]? {
+        var edges = [GraphEdge<Vertex>]()
         if let startVertexEdges = self.adjacencyList[vertex] {
             edges = startVertexEdges.reduce([], combine: { $0 + [GraphEdge(origin: vertex, target: $1.0, weight: $1.1)] })
             return edges
@@ -307,9 +306,9 @@ struct AdjacencyListGraph<E: Hashable> : Graph {
      - parameters:
         - vertices: Vertex for the edges to point to.
      */
-    func edges(toVertex vertex: E) -> [GraphEdge<E>]? {
+    func edges(toVertex vertex: Vertex) -> [GraphEdge<Vertex>]? {
         if let _ = self.adjacencyList[vertex] {
-            var allEdges = [GraphEdge<E>]()
+            var allEdges = [GraphEdge<Vertex>]()
             for edge in self.edges() {
                 if edge.targetVertex == vertex {
                     allEdges.append(edge)
