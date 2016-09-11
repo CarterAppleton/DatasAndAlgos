@@ -30,11 +30,11 @@ I'm adding a new data structure or algorithm a day [or trying to :)]. Please ema
 ---
 
 **History**
-- 09/10/16 - Breadth First Search, Queue, Stack
+- 09/10/16 - Breadth First Search, Queue, and Stack
 - 09/09/16 - Trie
 - 09/08/16 - Depth First Search
 - 09/07/16 - Kruskal's Algorithm
-- 09/06/16 - Graph & AdjacencyListGraph
+- 09/06/16 - Graph and AdjacencyListGraph
 - 09/05/16 - Splay Tree
 - 09/04/16 - Heap
 - 09/03/16 - Merge Sort
