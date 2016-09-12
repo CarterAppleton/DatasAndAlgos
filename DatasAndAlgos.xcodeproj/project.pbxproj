@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AD16A7121D866CF3002D5C00 /* TestingHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD16A7111D866CF3002D5C00 /* TestingHelpers.swift */; };
 		ADB000181D7CD88E00E95028 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB000171D7CD88E00E95028 /* main.swift */; };
 		ADB0001F1D7CD89E00E95028 /* RadixSort.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB0001E1D7CD89E00E95028 /* RadixSort.swift */; };
 		ADB000211D7CDA1100E95028 /* MergeSort.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB000201D7CDA1100E95028 /* MergeSort.swift */; };
@@ -37,6 +38,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		AD16A7111D866CF3002D5C00 /* TestingHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestingHelpers.swift; sourceTree = "<group>"; };
 		ADB000141D7CD88E00E95028 /* DatasAndAlgos */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = DatasAndAlgos; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADB000171D7CD88E00E95028 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		ADB0001E1D7CD89E00E95028 /* RadixSort.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RadixSort.swift; sourceTree = "<group>"; };
@@ -86,6 +88,7 @@
 			isa = PBXGroup;
 			children = (
 				ADB000171D7CD88E00E95028 /* main.swift */,
+				AD16A7111D866CF3002D5C00 /* TestingHelpers.swift */,
 				ADE6D0231D8506D600B7716E /* CustomExtensions.swift */,
 				ADB0001E1D7CD89E00E95028 /* RadixSort.swift */,
 				ADB000201D7CDA1100E95028 /* MergeSort.swift */,
@@ -161,6 +164,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AD16A7121D866CF3002D5C00 /* TestingHelpers.swift in Sources */,
 				ADE6D0241D8506D600B7716E /* CustomExtensions.swift in Sources */,
 				ADB000211D7CDA1100E95028 /* MergeSort.swift in Sources */,
 				ADB0002D1D7FE3D400E95028 /* KruskalsAlgorithm.swift in Sources */,

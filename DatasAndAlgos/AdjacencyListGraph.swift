@@ -14,7 +14,7 @@ struct AdjacencyListGraph<Vertex: Hashable> : Graph {
     private var adjacencyList: [Vertex : [Vertex : Int]] = [Vertex : [Vertex : Int]]()
     
     /// Directed or not
-    var undirected: Bool = true
+    private(set) var directed: Bool = false
     
     /**
      
@@ -24,10 +24,10 @@ struct AdjacencyListGraph<Vertex: Hashable> : Graph {
      An empty AdjacencyListGraph.
      
      - parameters:
-        - directed: Whether or not the edges is directed
+        - directed: Whether or not the edges are directed
      */
-    init(undirected: Bool) {
-        self.undirected = undirected
+    init(directed: Bool = false) {
+        self.directed = directed
     }
     
     /**
@@ -41,8 +41,8 @@ struct AdjacencyListGraph<Vertex: Hashable> : Graph {
         - directed: Whether or not the edges are directed
         - vertices: Vertices that should be in the graph.
      */
-    init(undirected: Bool, withVertices vertices: [Vertex]) {
-        self.undirected = undirected
+    init(directed: Bool = true, withVertices vertices: [Vertex]) {
+        self.directed = directed
         self.add(vertices: vertices)
 
     }
@@ -105,14 +105,16 @@ struct AdjacencyListGraph<Vertex: Hashable> : Graph {
         - weight: Weight of the edge
      */
     mutating func add(edgeFromVertex fromVertex: Vertex, toVertex: Vertex, withWeight weight: Int) -> Bool {
-        if self.adjacencyList[fromVertex] != nil && self.adjacencyList[toVertex] != nil {
-            self.adjacencyList[fromVertex]![toVertex] = weight
-            if self.undirected {
-                self.adjacencyList[toVertex]![fromVertex] = weight
-            }
-            return true
+        
+        guard let _ = self.adjacencyList[fromVertex], let _ = self.adjacencyList[toVertex] else {
+            return false
         }
-        return false
+        
+        self.adjacencyList[fromVertex]![toVertex] = weight
+        if !self.directed {
+            self.adjacencyList[toVertex]![fromVertex] = weight
+        }
+        return true
     }
     
     /**
@@ -139,6 +141,7 @@ struct AdjacencyListGraph<Vertex: Hashable> : Graph {
         for edge in edges {
             self.add(edgeFromVertex: edge.originVertex, toVertex: edge.targetVertex, withWeight: edge.weight)
         }
+        
         return true
     }
     
@@ -154,19 +157,25 @@ struct AdjacencyListGraph<Vertex: Hashable> : Graph {
         - toVertex: Vertex the edge ends at
      */
     mutating func remove(edgeFromVertex fromVertex: Vertex, toVertex: Vertex) -> Bool {
-        if let _ = self.adjacencyList[fromVertex], let _ = self.adjacencyList[toVertex] {
-            self.adjacencyList[fromVertex]![toVertex] = nil
-            if self.undirected {
-                self.adjacencyList[toVertex]![fromVertex] = nil
-            }
-            return true
+        
+        guard let _ = self.adjacencyList[fromVertex], let _ = self.adjacencyList[toVertex] else {
+            return false
+
         }
-        return false
+        
+        self.adjacencyList[fromVertex]![toVertex] = nil
+        
+        if !self.directed {
+            self.adjacencyList[toVertex]![fromVertex] = nil
+        }
+        
+        return true
     }
     
     /**
      
-     Removes all edges originating from the vertex, if the vertex exists.
+     Removes all edges originating from the vertex, if the vertex exists. If 
+     Graph is undirected, this is the same as removeEdgesToVertex.
      
      - returns:
      True if the vertex exists (all edges always removed on existence), false otherwise.
@@ -175,16 +184,27 @@ struct AdjacencyListGraph<Vertex: Hashable> : Graph {
         - vertex: Vertex to remove all edges from
      */
     mutating func remove(edgesFromVertex vertex: Vertex) -> Bool {
-        if let _ = self.adjacencyList[vertex] {
-            self.adjacencyList[vertex] = nil
-            return true
+        
+        // Make sure vertex exists
+        guard let _ = self.adjacencyList[vertex] else {
+            return false
         }
-        return false
+        
+        // Remove all edges from this vertex
+        self.adjacencyList[vertex] = [Vertex : Int]()
+        
+        // If undirected, remove all edges to this vertex
+        if !self.directed {
+            self.remove(edgesToVertex: vertex)
+        }
+        
+        return true
     }
     
     /**
      
-     Removes all edges pointing to a vertex, if the vertex exists
+     Removes all edges pointing to a vertex, if the vertex exists. If Graph is
+     undirected, this is the same as removeEdgesFromVertex.
      
      - returns:
      True if the vertex exists (all edges always removed on existence), false otherwise.
@@ -193,13 +213,18 @@ struct AdjacencyListGraph<Vertex: Hashable> : Graph {
         - vertex: Vertex to remove all edges pointing to
      */
     mutating func remove(edgesToVertex vertex: Vertex) -> Bool {
-        if let edges = self.edges(toVertex: vertex) {
-            for edge in edges {
-                self.remove(edgeFromVertex: edge.originVertex, toVertex: vertex)
-            }
-            return true
+        
+        // Make sure this vertex exists
+        guard let edges = self.edges(toVertex: vertex) else {
+            return false
         }
-        return false
+        
+        // Remove all edges to this vertex (and from if graph is undirected)
+        for edge in edges {
+            self.remove(edgeFromVertex: edge.originVertex, toVertex: vertex)
+        }
+        
+        return true
     }
     
     /**
@@ -254,10 +279,12 @@ struct AdjacencyListGraph<Vertex: Hashable> : Graph {
         - vertex: Origin vertex
      */
     func vertices(adjacentTo vertex: Vertex) -> [Vertex]? {
-        if let edges = self.adjacencyList[vertex] {
-            return edges.reduce([Vertex](), combine: { $0 + [$1.0]})
+        
+        guard let edges = self.adjacencyList[vertex] else {
+            return nil
         }
-        return nil
+        
+        return edges.reduce([Vertex](), combine: { $0 + [$1.0]})
     }
     
     /**
@@ -268,11 +295,25 @@ struct AdjacencyListGraph<Vertex: Hashable> : Graph {
      All edges.
      */
     func edges() -> [GraphEdge<Vertex>] {
+        
         var allEdges = [GraphEdge<Vertex>]()
         for (vertex, _) in self.adjacencyList {
             allEdges += self.edges(fromVertex: vertex)!
         }
-        return allEdges
+        
+        if self.directed {
+            return allEdges
+        }
+        
+        // Remove all duplicate edges if the graph is undirected
+        allEdges = allEdges.map { (edge: GraphEdge<Vertex>) -> GraphEdge<Vertex> in
+            var edge = edge
+            if edge.originVertex.hashValue < edge.targetVertex.hashValue {
+                swap(&edge.originVertex, &edge.targetVertex)
+            }
+            return edge
+        }
+        return Array(Set(allEdges))
     }
     
     /**
@@ -287,12 +328,16 @@ struct AdjacencyListGraph<Vertex: Hashable> : Graph {
         - vertices: Vertex for the edges to originate from.
      */
     func edges(fromVertex vertex: Vertex) -> [GraphEdge<Vertex>]? {
-        var edges = [GraphEdge<Vertex>]()
-        if let startVertexEdges = self.adjacencyList[vertex] {
-            edges = startVertexEdges.reduce([], combine: { $0 + [GraphEdge(origin: vertex, target: $1.0, weight: $1.1)] })
-            return edges
+        
+        guard let startVertexEdges = self.adjacencyList[vertex] else {
+            return nil
         }
-        return nil
+        
+        let edges: [GraphEdge<Vertex>] = startVertexEdges.reduce([], combine: {
+            $0 + [GraphEdge(origin: vertex, target: $1.0, weight: $1.1)]
+        })
+        return edges
+
     }
     
     /**
@@ -307,16 +352,21 @@ struct AdjacencyListGraph<Vertex: Hashable> : Graph {
         - vertices: Vertex for the edges to point to.
      */
     func edges(toVertex vertex: Vertex) -> [GraphEdge<Vertex>]? {
-        if let _ = self.adjacencyList[vertex] {
-            var allEdges = [GraphEdge<Vertex>]()
-            for edge in self.edges() {
-                if edge.targetVertex == vertex {
-                    allEdges.append(edge)
+        
+        guard let _ = self.adjacencyList[vertex] else {
+            return nil
+        }
+        
+        var allEdges = [GraphEdge<Vertex>]()
+        for (originVertex, edges) in self.adjacencyList {
+            for (targetVertex, weight) in edges {
+                if targetVertex == vertex {
+                    allEdges.append(GraphEdge(origin: originVertex, target: vertex, weight: weight))
                 }
             }
-            return allEdges
         }
-        return nil
+        return allEdges
+        
     }
     
 }

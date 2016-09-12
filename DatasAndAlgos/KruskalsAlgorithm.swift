@@ -16,12 +16,12 @@ extension AdjacencyListGraph {
     func minimumSpanningTree() throws -> AdjacencyListGraph {
 
         // Graph must be undirected
-        if !self.undirected {
+        if self.directed {
             throw GraphStructureError.NotUndirected
         }
         
         // Graph to represent the final spanning tree
-        var resultGraph = AdjacencyListGraph(undirected: true)
+        var resultGraph = AdjacencyListGraph()
         
         // Keep all the edges in a min heap, sorted by edge weight
         var edgeQueue: Heap<GraphEdge<Vertex>> = Heap(comparison: <, withItems: self.edges())
@@ -31,16 +31,19 @@ extension AdjacencyListGraph {
         
         // While there are unchecked edges and vertices to be added, try to add
         //  the edges.
-        while let edge = edgeQueue.pop() where unaddedVertices.count > 0 {
+        while let edge = edgeQueue.pop() {
             
-            // Only add an edge if one of its endpoints is not already in the graph
-            if unaddedVertices.contains(edge.originVertex) || unaddedVertices.contains(edge.targetVertex) {
-                resultGraph.add(vertex: edge.originVertex)
-                resultGraph.add(vertex: edge.targetVertex)
-                resultGraph.add(edgeFromVertex: edge.originVertex, toVertex: edge.targetVertex, withWeight: edge.weight)
+            resultGraph.add(vertex: edge.originVertex)
+            resultGraph.add(vertex: edge.targetVertex)
+            resultGraph.add(edgeFromVertex: edge.originVertex, toVertex: edge.targetVertex, withWeight: edge.weight)
+            
+            if try resultGraph.cycleExists() {
+                resultGraph.remove(edgeFromVertex: edge.originVertex, toVertex: edge.targetVertex)
+            } else {
                 unaddedVertices.remove(edge.originVertex)
                 unaddedVertices.remove(edge.targetVertex)
             }
+
         }
         
         // Add all of the unadded vertices. Only vertices with no edges connected

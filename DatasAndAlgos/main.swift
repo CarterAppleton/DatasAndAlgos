@@ -7,80 +7,78 @@
 //
 
 print("Hello, Daily Data Structures and Algorithms!")
+print("")
 
-func testFunction<E: Equatable>(testCase: String, inputs: [([E]?,[E]?)]) {
-    print("Starting Testing: \(testCase)")
-    var failedCases = ""
-    for (index,input) in inputs.enumerate() {
-        if let lhs = input.0, let rhs = input.1 {
-            if lhs != rhs {
-                failedCases += "\(index), "
-            }
-        } else if input.0 != nil || input.1 != nil {
-            failedCases += "\(index), "
-        }
-
-    }
-    if failedCases != "" {
-        print("- FAILED: [\(failedCases.substringToIndex(failedCases.endIndex.predecessor().predecessor()))]")
-    } else {
-        print("- SUCCESS")
-    }
-
-    print("")
-}
-
-func testFunction<E: Equatable>(testCase: String, inputs: [(E?,E?)]) {
-    print("Starting Testing: \(testCase)")
-    var failedCases = ""
-    for (index,input) in inputs.enumerate() {
-        if let lhs = input.0, let rhs = input.1 {
-            if lhs != rhs {
-                failedCases += "\(index), "
-            }
-        } else if input.0 != nil || input.1 != nil {
-            failedCases += "\(index), "
-        }
-        
-    }
-    if failedCases != "" {
-        print("- FAILED: [\(failedCases.substringToIndex(failedCases.endIndex.predecessor().predecessor()))]")
-    } else {
-        print("- SUCCESS")
-    }
-    
-    print("")
-}
-
-func testFunction(testCase: String, inputs: [(Bool,Bool)]) {
-    print("Starting Testing: \(testCase)")
-    var failedCases = ""
-    for (index,input) in inputs.enumerate() {
-        if input.0 != input.1 {
-            failedCases += "\(index), "
-        }
-    }
-    if failedCases != "" {
-        print("- FAILED: [\(failedCases.substringToIndex(failedCases.endIndex.predecessor().predecessor()))]")
-    } else {
-        print("- SUCCESS")
-    }
-    
-    print("")
-}
-
-let b = [1,2,3,6,77,8,4,23,4,5677,89,34,5,7765,345,2,34,45,56,457,6,8,5,456,432,3,4,5,56,7,64,32,1,21,1,2,3,4,45,7,3]
+let emptyArray = [Int]()
+let singleArray = [1]
+let smallArray = [1,3,2]
+let smallArray2 = [1,-3,2]
+let increasingArray = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]
+let decreasingArray: [Int] = increasingArray.reverse()
+let largeArray = [1,2,3,6,77,8,4,23,4,5677,89,34,5,7765,345,2,34,45,56,457,6,8,5,456,432,3,4,5,56,7,64,32,1,21,1,2,3,4,45,7,3]
+let largeArraySorted = [1, 1, 1, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 6, 6, 7, 7, 8, 8, 21, 23, 32, 34, 34, 45, 45, 56, 56, 64, 77, 89, 345, 432, 456, 457, 5677, 7765]
+let largeArrayUnique = [1, 2, 3, 4, 5, 6, 7, 8, 21, 23, 32, 34, 45, 56, 64, 77, 89, 345, 432, 456, 457, 5677, 7765]
 
 // Splay Tree
 
-var s = SplayTree(b)
-var h = Heap(comparison: <, withItems: b)
+var h1 = Heap(comparison: <, withItems: emptyArray)
+var h2 = Heap(comparison: <, withItems: singleArray)
+var h3 = Heap(comparison: <, withItems: smallArray)
+var h4 = Heap(comparison: <, withItems: smallArray2)
+var h5 = Heap(comparison: <, withItems: increasingArray)
+var h6 = Heap(comparison: <, withItems: decreasingArray)
+var h7 = Heap(comparison: <, withItems: largeArraySorted)
 
-print(Array(s))
-print(Array(h))
-print(b.sort())
-print(b.mergeSort())
-print(b.radixSort())
+let heapTestCases = [
+    (Array(h1) == [], true),
+    (Array(h2) == singleArray, true),
+    (Array(h3) == [1,2,3], true),
+    (Array(h4) == [-3,1,2], true),
+    (Array(h5) == increasingArray, true),
+    (Array(h6) == increasingArray, true)
+]
+testFunction("Heap", inputs: heapTestCases)
+
+
+let s1 = SplayTree(emptyArray)
+let s2 = SplayTree(singleArray)
+let s3 = SplayTree(smallArray)
+let s4 = SplayTree(smallArray2)
+let s5 = SplayTree(increasingArray)
+let s6 = SplayTree(decreasingArray)
+let s7 = SplayTree(largeArraySorted)
+
+let splayTreeTestCases = [
+    (Array(s1) == [], true),
+    (Array(s2) == singleArray, true),
+    (Array(s3) == [1,2,3], true),
+    (Array(s4) == [-3,1,2], true),
+    (Array(s5) == increasingArray, true),
+    (Array(s6) == increasingArray, true)
+]
+testFunction("Splay Tree", inputs: splayTreeTestCases)
+
+
+let mergeSortTestCases = [
+    (emptyArray.mergeSort() == [], true),
+    (singleArray.mergeSort() == singleArray, true),
+    (smallArray.mergeSort() == [1,2,3], true),
+    (smallArray2.mergeSort() == [-3,1,2], true),
+    (increasingArray.mergeSort() == increasingArray, true),
+    (decreasingArray.mergeSort() == increasingArray, true),
+    (largeArray.mergeSort() == largeArraySorted, true)
+]
+testFunction("Merge Sort", inputs: mergeSortTestCases)
+
+let radixSortTestCases = [
+    (emptyArray.radixSort() == [], true),
+    (singleArray.radixSort() == singleArray, true),
+    (smallArray.radixSort() == [1,2,3], true),
+    (increasingArray.radixSort() == increasingArray, true),
+    (decreasingArray.radixSort() == increasingArray, true),
+    (largeArray.radixSort() == largeArraySorted, true)
+]
+testFunction("Radix Sort", inputs: radixSortTestCases)
 
 
 /*
@@ -104,7 +102,8 @@ Graph A:
  
  */
 
-var graphA: AdjacencyListGraph<String> = AdjacencyListGraph(undirected: true)
+
+var graphA: AdjacencyListGraph<String> = AdjacencyListGraph()
 graphA.add(vertices: ["a","b","c","d","e","f"],
           withEdges: [
             GraphEdge(origin: "a", target: "b", weight: 2),
@@ -114,8 +113,8 @@ graphA.add(vertices: ["a","b","c","d","e","f"],
             GraphEdge(origin: "c", target: "e", weight: 3),
             GraphEdge(origin: "c", target: "d", weight: 7)
     ])
-print(graphA.vertices())
-print(graphA.edges())
+//print(graphA.vertices())
+//print(graphA.edges())
 
 /*
  
@@ -128,7 +127,7 @@ print(graphA.edges())
            10
  */
 
-var graphB: AdjacencyListGraph<String> = AdjacencyListGraph(undirected: true)
+var graphB: AdjacencyListGraph<String> = AdjacencyListGraph()
 graphB.add(vertices: ["a","b","c","d","e","f"],
            withEdges: [
             GraphEdge(origin: "a", target: "b", weight: 1),
@@ -137,8 +136,8 @@ graphB.add(vertices: ["a","b","c","d","e","f"],
             GraphEdge(origin: "d", target: "e", weight: 1),
             GraphEdge(origin: "a", target: "e", weight: 10)
     ])
-print(graphA.vertices())
-print(graphA.edges())
+//print(graphA.vertices())
+//print(graphA.edges())
 
 /*
  
@@ -147,32 +146,50 @@ print(graphA.edges())
  */
 
 var graphAMinSpanningTree = try graphA.minimumSpanningTree()
-print(graphAMinSpanningTree.vertices())
-print(graphAMinSpanningTree.edges())
+var graphBMinSpanningTree = try graphB.minimumSpanningTree()
+
+let minSpanningTreeTestCases = [
+    (graphAMinSpanningTree.vertices().count == graphA.vertices().count, true),
+    (graphAMinSpanningTree.edges().count == 4,true),
+    (graphAMinSpanningTree.edges().map({ $0.weight }).sum() == 13,true),
+    (graphBMinSpanningTree.vertices().count == graphB.vertices().count, true),
+    (graphBMinSpanningTree.edges().count == 4,true),
+    (graphBMinSpanningTree.edges().map({ $0.weight }).sum() == 4,true),
+]
+testFunction("Kruskal's Algorithm", inputs: minSpanningTreeTestCases)
+
 
 /*
  
  Testing DFS
  
  */
-
-print(graphA.depthFirstSearch("a")) // True
-print(graphA.depthFirstSearch("b")) // True
-print(graphA.depthFirstSearch("f")) // True
-print(graphA.depthFirstSearch("d")) // True
-print(graphA.depthFirstSearch("g")) // False
+let dfsTestCases = [
+    (graphA.depthFirstSearch("a"),true),
+    (graphA.depthFirstSearch("b"),true),
+    (graphA.depthFirstSearch("f"),true),
+    (graphA.depthFirstSearch("d"),true),
+    (graphA.depthFirstSearch("g"),false),
+    (graphB.depthFirstSearch("a"),true)
+]
+testFunction("Depth First Search", inputs: dfsTestCases)
 
 /*
  
  Testing BFS
  
  */
-print(graphA.breadthFirstSearch(forVertex: "a", startingAt: "d")) // True
-print(graphA.breadthFirstSearch(forVertex: "c", startingAt: "a")) // True
-print(graphA.breadthFirstSearch(forVertex: "a", startingAt: "e")) // True
-print(graphA.breadthFirstSearch(forVertex: "e", startingAt: "a")) // True
-print(graphA.breadthFirstSearch(forVertex: "a", startingAt: "f")) // False
-print(graphA.breadthFirstSearch(forVertex: "g", startingAt: "a")) // false
+let bfsTestCases: [([String]?,[String]?)] = [
+    (graphA.breadthFirstSearch(forVertex: "a", startingAt: "d"),["d","c","a"]),
+    (graphA.breadthFirstSearch(forVertex: "c", startingAt: "a"),["a","c"]),
+    (graphA.breadthFirstSearch(forVertex: "a", startingAt: "e"),["e","b","a"]),
+    (graphA.breadthFirstSearch(forVertex: "e", startingAt: "a"),["a","b","e"]),
+    (graphB.breadthFirstSearch(forVertex: "e", startingAt: "a"),["a","e"]),
+    (graphA.breadthFirstSearch(forVertex: "a", startingAt: "f"),nil),
+    (graphA.breadthFirstSearch(forVertex: "g", startingAt: "a"),nil),
+    (graphA.breadthFirstSearch(forVertex: "g", startingAt: "h"),nil)
+]
+testFunction("Breadth First Search", inputs: bfsTestCases)
 
 /*
  

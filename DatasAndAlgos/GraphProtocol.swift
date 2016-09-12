@@ -10,13 +10,13 @@ protocol Graph {
     associatedtype T : Hashable
     
     /// Whether or not the graph is directed
-    var undirected: Bool { get }
+    var directed: Bool { get }
     
     /// Initialize as directed or not
-    init(undirected: Bool)
+    init(directed: Bool)
     
     /// Initialize as directed or not with vertices
-    init(undirected: Bool, withVertices vertices: [T])
+    init(directed: Bool, withVertices vertices: [T])
     
     /// Add a vertex
     mutating func add(vertex vertex: T)

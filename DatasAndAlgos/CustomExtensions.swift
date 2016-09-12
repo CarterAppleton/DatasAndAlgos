@@ -22,3 +22,11 @@ func * (left: String, right: Int) -> String {
     
     return result
 }
+
+extension _ArrayType where Generator.Element == Int {
+
+    func sum() -> Int {
+        return self.reduce(0, combine: +)
+    }
+    
+}
