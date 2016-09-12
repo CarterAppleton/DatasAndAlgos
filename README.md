@@ -19,7 +19,7 @@ I'm adding a new data structure or algorithm a day [or trying to :)]. Please ema
 **Graph: Search**
 - Depth First Search
 - Breadth First Search
-- Dijkstra's Algorithm (Coming soon)
+- Dijkstra's Algorithm
 - A* (Coming soon)
 
 **Graph: Minimum Spanning Tree**
@@ -30,6 +30,7 @@ I'm adding a new data structure or algorithm a day [or trying to :)]. Please ema
 ---
 
 **History**
+- 09/11/16 - Dijkstra's Algorithm
 - 09/10/16 - Breadth First Search, Queue, and Stack
 - 09/09/16 - Trie
 - 09/08/16 - Depth First Search
