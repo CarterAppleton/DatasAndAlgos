@@ -30,3 +30,11 @@ extension _ArrayType where Generator.Element == Int {
     }
     
 }
+
+extension Array where Element: Hashable {
+    
+    func removeDuplicates() -> [Element] {
+        return Array(Set<Element>(self))
+    }
+    
+}

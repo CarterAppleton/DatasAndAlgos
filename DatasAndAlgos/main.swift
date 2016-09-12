@@ -17,44 +17,45 @@ let increasingArray = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]
 let decreasingArray: [Int] = increasingArray.reverse()
 let largeArray = [1,2,3,6,77,8,4,23,4,5677,89,34,5,7765,345,2,34,45,56,457,6,8,5,456,432,3,4,5,56,7,64,32,1,21,1,2,3,4,45,7,3]
 let largeArraySorted = [1, 1, 1, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 6, 6, 7, 7, 8, 8, 21, 23, 32, 34, 34, 45, 45, 56, 56, 64, 77, 89, 345, 432, 456, 457, 5677, 7765]
-let largeArrayUnique = [1, 2, 3, 4, 5, 6, 7, 8, 21, 23, 32, 34, 45, 56, 64, 77, 89, 345, 432, 456, 457, 5677, 7765]
+let largeArrayUniqueSorted = [1, 2, 3, 4, 5, 6, 7, 8, 21, 23, 32, 34, 45, 56, 64, 77, 89, 345, 432, 456, 457, 5677, 7765]
 
 // Splay Tree
 
-var h1 = Heap(comparison: <, withItems: emptyArray)
-var h2 = Heap(comparison: <, withItems: singleArray)
-var h3 = Heap(comparison: <, withItems: smallArray)
-var h4 = Heap(comparison: <, withItems: smallArray2)
-var h5 = Heap(comparison: <, withItems: increasingArray)
-var h6 = Heap(comparison: <, withItems: decreasingArray)
-var h7 = Heap(comparison: <, withItems: largeArraySorted)
+var h1 = Array(Heap(comparison: <, withItems: emptyArray))
+var h2 = Array(Heap(comparison: <, withItems: singleArray))
+var h3 = Array(Heap(comparison: <, withItems: smallArray))
+var h4 = Array(Heap(comparison: <, withItems: smallArray2))
+var h5 = Array(Heap(comparison: <, withItems: increasingArray))
+var h6 = Array(Heap(comparison: <, withItems: decreasingArray))
+var h7 = Array(Heap(comparison: <, withItems: largeArray))
 
 let heapTestCases = [
-    (Array(h1) == [], true),
-    (Array(h2) == singleArray, true),
-    (Array(h3) == [1,2,3], true),
-    (Array(h4) == [-3,1,2], true),
-    (Array(h5) == increasingArray, true),
-    (Array(h6) == increasingArray, true)
+    (h1 == [], true),
+    (h2 == singleArray, true),
+    (h3 == [1,2,3], true),
+    (h4 == [-3,1,2], true),
+    (h5 == increasingArray, true),
+    (h6 == increasingArray, true),
+    (h7 == largeArraySorted, true)
 ]
 testFunction("Heap", inputs: heapTestCases)
 
-
-let s1 = SplayTree(emptyArray)
-let s2 = SplayTree(singleArray)
-let s3 = SplayTree(smallArray)
-let s4 = SplayTree(smallArray2)
-let s5 = SplayTree(increasingArray)
-let s6 = SplayTree(decreasingArray)
-let s7 = SplayTree(largeArraySorted)
+let s1 = Array(SplayTree(emptyArray))
+let s2 = Array(SplayTree(singleArray))
+let s3 = Array(SplayTree(smallArray))
+let s4 = Array(SplayTree(smallArray2))
+let s5 = Array(SplayTree(increasingArray))
+let s6 = Array(SplayTree(decreasingArray))
+let s7 = Array(SplayTree(largeArray))
 
 let splayTreeTestCases = [
-    (Array(s1) == [], true),
-    (Array(s2) == singleArray, true),
-    (Array(s3) == [1,2,3], true),
-    (Array(s4) == [-3,1,2], true),
-    (Array(s5) == increasingArray, true),
-    (Array(s6) == increasingArray, true)
+    (s1 == [], true),
+    (s2 == singleArray, true),
+    (s3 == [1,2,3], true),
+    (s4 == [-3,1,2], true),
+    (s5 == increasingArray, true),
+    (s6 == increasingArray, true),
+    (s7 == largeArrayUniqueSorted, true)
 ]
 testFunction("Splay Tree", inputs: splayTreeTestCases)
 
