@@ -7,8 +7,12 @@ I'm adding a new data structure or algorithm a day [or trying to :)]. Please ema
 - Merge Sort
  
 **Data Structures**
-- Splay Tree
-- Heap
+- Binary Tree (Protocol) (Coming soon)
+ - Binary Tree (Coming soon)
+ - Splay Tree
+- Heap (Protocol) (Coming soon)
+ - Binary Heap
+ - Pairing Heap (Coming soon)
 - Graph (Protocol)
  - Adjacency List Graph
  - Pointer Graph (Coming soon)
