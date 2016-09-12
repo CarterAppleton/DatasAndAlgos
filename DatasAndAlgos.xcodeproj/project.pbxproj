@@ -21,6 +21,7 @@
 		ADE6D0201D85011600B7716E /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE6D01F1D85011600B7716E /* Stack.swift */; };
 		ADE6D0221D85011F00B7716E /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE6D0211D85011F00B7716E /* Queue.swift */; };
 		ADE6D0241D8506D600B7716E /* CustomExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE6D0231D8506D600B7716E /* CustomExtensions.swift */; };
+		ADE6D0261D863D4200B7716E /* DijkstrasAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE6D0251D863D4200B7716E /* DijkstrasAlgorithm.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -51,6 +52,7 @@
 		ADE6D01F1D85011600B7716E /* Stack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
 		ADE6D0211D85011F00B7716E /* Queue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		ADE6D0231D8506D600B7716E /* CustomExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomExtensions.swift; sourceTree = "<group>"; };
+		ADE6D0251D863D4200B7716E /* DijkstrasAlgorithm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DijkstrasAlgorithm.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +96,7 @@
 				ADB000241D7CDA7A00E95028 /* SplayTree.swift */,
 				ADB000281D7FB3E200E95028 /* AdjacencyListGraph.swift */,
 				ADB000451D82642700E95028 /* Trie.swift */,
+				ADE6D0251D863D4200B7716E /* DijkstrasAlgorithm.swift */,
 				ADB0002A1D7FC96E00E95028 /* GraphProtocol.swift */,
 				ADB0002C1D7FE3D400E95028 /* KruskalsAlgorithm.swift */,
 				ADB000261D7CE78F00E95028 /* Heap.swift */,
@@ -161,6 +164,7 @@
 				ADE6D0241D8506D600B7716E /* CustomExtensions.swift in Sources */,
 				ADB000211D7CDA1100E95028 /* MergeSort.swift in Sources */,
 				ADB0002D1D7FE3D400E95028 /* KruskalsAlgorithm.swift in Sources */,
+				ADE6D0261D863D4200B7716E /* DijkstrasAlgorithm.swift in Sources */,
 				ADB000481D8269CE00E95028 /* DepthFirstSearch.swift in Sources */,
 				ADB000271D7CE78F00E95028 /* Heap.swift in Sources */,
 				ADE6D0221D85011F00B7716E /* Queue.swift in Sources */,

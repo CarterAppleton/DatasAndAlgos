@@ -15,7 +15,7 @@ extension AdjacencyListGraph {
     /// Kruskal's Mininum Spanning Tree Algorithm
     func minimumSpanningTree() throws -> AdjacencyListGraph {
 
-        // Graph must be directed
+        // Graph must be undirected
         if !self.undirected {
             throw GraphStructureError.NotUndirected
         }
@@ -23,8 +23,8 @@ extension AdjacencyListGraph {
         // Graph to represent the final spanning tree
         var resultGraph = AdjacencyListGraph(undirected: true)
         
-        // Keep all the edges in a heap, sorted by the lightest edge
-        var edgeQueue: Heap<GraphEdge<Vertex>> = Heap(type: .Min, withItems: self.edges())
+        // Keep all the edges in a min heap, sorted by edge weight
+        var edgeQueue: Heap<GraphEdge<Vertex>> = Heap(comparison: <, withItems: self.edges())
         
         // Vertices not yet in our result graph
         var unaddedVertices = Set<Vertex>(self.vertices())

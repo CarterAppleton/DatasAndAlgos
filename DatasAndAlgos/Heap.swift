@@ -6,65 +6,41 @@
 //  Copyright © 2016 Carter Appleton. All rights reserved.
 //
 
-/**
- 
- Type of Heaps that can be created.
- 
- * Min: Min heap where the minimum element will be at the top
- * Max: Max heap where the maximum element will be at the top
-
- */
-enum HeapType<E: Comparable> {
-    
-    case Min, Max
-    
-    func comparison() -> ((E, E) -> Bool) {
-        switch self {
-        case .Min:
-            return {$0 < $1}
-        case .Max:
-            fallthrough
-        default:
-            return {$0 > $1}
-        }
-    }
-}
-
-struct Heap<E: Comparable> {
+struct Heap<Element> {
     
     /// Comparison function the heap is based on
-    private var comparison: ((E, E) -> Bool)!
+    private var comparison: ((Element, Element) -> Bool)!
     
     /// Array used to hold elements of the heap
-    private var heap: [E] = [E]()
-    
+    private var heap: [Element] = [Element]()
+
     /**
      
-     Initialize an empty heap with a default comparison function.
+     Initialize an empty heap with a comparison function.
      
      - returns:
      An empty heap.
      
      - parameters:
-        - type: The type of heap to create, either Min or Max.
+        - comparison: Whether an element is larger than the other
      */
-    init(type: HeapType<E>) {
-        self.comparison = type.comparison()
+    init(comparison: ((Element, Element) -> Bool)) {
+        self.comparison = comparison
     }
     
     /**
      
-     Initialize a heap with a default comparison function, filled with elements.
+     Initialize a heap with a comparison function, filled with elements.
      
      - returns:
      A heap filled with the elements in arr.
      
      - parameters:
-        - type: The type of heap to create, either Min or Max.
+        - comparison: Whether an element is larger than the other
         - arr: Elements to initialize the heap with.
      */
-    init<S : SequenceType where S.Generator.Element == E>(type: HeapType<E>, withItems items: S) {
-        self.comparison = type.comparison()
+    init<S : SequenceType where S.Generator.Element == Element>(comparison: ((Element, Element) -> Bool), withItems items: S) {
+        self.comparison = comparison
         self.insert(items)
     }
     
@@ -75,19 +51,19 @@ struct Heap<E: Comparable> {
      - parameters:
         - item: The item to insert in the heap.
      */
-    mutating func insert(item: E) {
+    mutating func insert(item: Element) {
         heap += [item]
         self.percolateUp(heap.count - 1)
     }
     
     /**
      
-     Insert an array of items into the heap.
+     Insert a sequence of items into the heap.
      
      - parameters:
         - items: The items to insert in the heap.
      */
-    mutating func insert<S : SequenceType where S.Generator.Element == E>(items: S) {
+    mutating func insert<S : SequenceType where S.Generator.Element == Element>(items: S) {
         for item in items {
             self.insert(item)
         }
@@ -100,7 +76,7 @@ struct Heap<E: Comparable> {
      - returns:
      Top most item in the heap, if it exists. Nil if the heap is empty.
      */
-    func peek() -> E? {
+    func peek() -> Element? {
         return self.heap.first
     }
     
@@ -111,10 +87,10 @@ struct Heap<E: Comparable> {
      - returns:
      Top most item in the heap, if it exists. Nil if the heap is empty.
      */
-    mutating func pop() -> E? {
+    mutating func pop() -> Element? {
         if let top = self.heap.first {
             if self.heap.count == 1 {
-                self.heap = [E]()
+                self.heap = [Element]()
             } else {
                 self.heap[0] = self.heap.removeLast()
                 self.percolateDown(0)
@@ -131,8 +107,8 @@ struct Heap<E: Comparable> {
      - returns:
      Sorted array of all items in the heap.
      */
-    private func array() -> [E] {
-        var arr = [E]()
+    private func array() -> [Element] {
+        var arr = [Element]()
         var h = self
         while let next = h.pop() {
             arr += [next]
@@ -210,7 +186,7 @@ struct Heap<E: Comparable> {
  
  */
 extension Heap : SequenceType {
-    typealias Generator = AnyGenerator<E>
+    typealias Generator = AnyGenerator<Element>
     
     func generate() -> Generator {
         var index = 0

@@ -66,7 +66,7 @@ protocol Graph {
 
 
 /// Graph Edge- Comparable by weight to other edges and printable to console
-struct GraphEdge<E: Hashable> : Comparable, CustomStringConvertible {
+struct GraphEdge<E: Hashable> : Comparable, Hashable, CustomStringConvertible {
     
     /// The origin of the edge, or one endpoint on an undirected graph
     var originVertex: E
@@ -76,6 +76,11 @@ struct GraphEdge<E: Hashable> : Comparable, CustomStringConvertible {
     
     /// The weight of the edge, or 0 if unweighted
     var weight: Int
+    
+    /// Hashvalue
+    var hashValue: Int {
+        return originVertex.hashValue ^ targetVertex.hashValue ^ weight.hashValue
+    }
     
     /// Initialize an unweighted edge
     init(origin: E, target: E) {
@@ -100,6 +105,8 @@ struct GraphEdge<E: Hashable> : Comparable, CustomStringConvertible {
 /// Compare weight of two Graph Edges, True if their weights are the same
 func ==<T>(lhs: GraphEdge<T>, rhs: GraphEdge<T>) -> Bool {
     return lhs.weight == rhs.weight
+        && lhs.originVertex == rhs.originVertex
+        && lhs.targetVertex == rhs.targetVertex
 }
 
 /// Compare weight of two Graph Edges, True if left is lighter than right
