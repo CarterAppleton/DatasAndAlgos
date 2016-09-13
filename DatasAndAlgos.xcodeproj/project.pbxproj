@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		AD16A7121D866CF3002D5C00 /* TestingHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD16A7111D866CF3002D5C00 /* TestingHelpers.swift */; };
 		AD16A7141D878FBF002D5C00 /* PairingHeap.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD16A7131D878FBF002D5C00 /* PairingHeap.swift */; };
+		AD16A7161D879D7C002D5C00 /* Heap.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD16A7151D879D7C002D5C00 /* Heap.swift */; };
 		ADB000181D7CD88E00E95028 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB000171D7CD88E00E95028 /* main.swift */; };
 		ADB0001F1D7CD89E00E95028 /* RadixSort.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB0001E1D7CD89E00E95028 /* RadixSort.swift */; };
 		ADB000211D7CDA1100E95028 /* MergeSort.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB000201D7CDA1100E95028 /* MergeSort.swift */; };
@@ -41,6 +42,7 @@
 /* Begin PBXFileReference section */
 		AD16A7111D866CF3002D5C00 /* TestingHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestingHelpers.swift; sourceTree = "<group>"; };
 		AD16A7131D878FBF002D5C00 /* PairingHeap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PairingHeap.swift; sourceTree = "<group>"; };
+		AD16A7151D879D7C002D5C00 /* Heap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Heap.swift; sourceTree = "<group>"; };
 		ADB000141D7CD88E00E95028 /* DatasAndAlgos */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = DatasAndAlgos; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADB000171D7CD88E00E95028 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		ADB0001E1D7CD89E00E95028 /* RadixSort.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RadixSort.swift; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 				ADE6D0251D863D4200B7716E /* DijkstrasAlgorithm.swift */,
 				ADB0002A1D7FC96E00E95028 /* GraphProtocol.swift */,
 				ADB0002C1D7FE3D400E95028 /* KruskalsAlgorithm.swift */,
+				AD16A7151D879D7C002D5C00 /* Heap.swift */,
 				ADB000261D7CE78F00E95028 /* BinaryHeap.swift */,
 				AD16A7131D878FBF002D5C00 /* PairingHeap.swift */,
 			);
@@ -176,6 +179,7 @@
 				ADB000271D7CE78F00E95028 /* BinaryHeap.swift in Sources */,
 				ADE6D0221D85011F00B7716E /* Queue.swift in Sources */,
 				AD16A7141D878FBF002D5C00 /* PairingHeap.swift in Sources */,
+				AD16A7161D879D7C002D5C00 /* Heap.swift in Sources */,
 				ADE6D0201D85011600B7716E /* Stack.swift in Sources */,
 				ADB000461D82642700E95028 /* Trie.swift in Sources */,
 				ADB0001F1D7CD89E00E95028 /* RadixSort.swift in Sources */,

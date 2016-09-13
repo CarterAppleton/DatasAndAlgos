@@ -6,7 +6,7 @@
 //  Copyright © 2016 Carter Appleton. All rights reserved.
 //
 
-struct PairingHeap<Element> {
+struct PairingHeap<Element>: Heap {
     
     /// Comparison function the heap is based on
     private var comparison: ((Element, Element) -> Bool)!
@@ -52,7 +52,7 @@ struct PairingHeap<Element> {
      Insert an item into the heap.
      
      - parameters:
-     - item: The item to insert in the heap.
+        - item: The item to insert in the heap.
      */
     mutating func insert(item: Element) {
         
@@ -75,7 +75,7 @@ struct PairingHeap<Element> {
      Insert a sequence of items into the heap.
      
      - parameters:
-     - items: The items to insert in the heap.
+        - items: The items to insert in the heap.
      */
     mutating func insert<S : SequenceType where S.Generator.Element == Element>(items: S) {
         for item in items {
@@ -90,7 +90,7 @@ struct PairingHeap<Element> {
      - returns:
      Top most item in the heap, if it exists. Nil if the heap is empty.
      */
-    func peek() -> Element? {
+    func top() -> Element? {
         return self.element
     }
     
@@ -155,7 +155,7 @@ struct PairingHeap<Element> {
      Recursively swaps the given index with its parent, so long as the comparative function holds and there exists a parent.
      
      - parameters:
-     - index: Index of the item to percolate up
+        - index: Index of the item to percolate up
      */
     private func merge(lhs lhs: PairingHeap<Element>, rhs: PairingHeap<Element>) -> PairingHeap<Element> {
         

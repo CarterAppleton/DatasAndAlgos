@@ -6,7 +6,7 @@
 //  Copyright © 2016 Carter Appleton. All rights reserved.
 //
 
-struct BinaryHeap<Element> {
+struct BinaryHeap<Element>: Heap {
     
     /// Comparison function the heap is based on
     private var comparison: ((Element, Element) -> Bool)!
@@ -76,7 +76,7 @@ struct BinaryHeap<Element> {
      - returns:
      Top most item in the heap, if it exists. Nil if the heap is empty.
      */
-    func peek() -> Element? {
+    func top() -> Element? {
         return self.heap.first
     }
     
@@ -151,8 +151,8 @@ struct BinaryHeap<Element> {
          The index of the correct child, if such a child exists. Nil if there are no such children.
          
          - parameters:
-         - left: Index of the left child to check
-         - right: Index of the right child to check
+            - left: Index of the left child to check
+            - right: Index of the right child to check
          */
         func chooseChild(left: Int, right: Int) -> Int? {
             
