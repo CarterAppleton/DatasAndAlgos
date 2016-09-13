@@ -19,6 +19,36 @@ let largeArray = [1,2,3,6,77,8,4,23,4,5677,89,34,5,7765,345,2,34,45,56,457,6,8,5
 let largeArraySorted = [1, 1, 1, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 6, 6, 7, 7, 8, 8, 21, 23, 32, 34, 34, 45, 45, 56, 56, 64, 77, 89, 345, 432, 456, 457, 5677, 7765]
 let largeArrayUniqueSorted = [1, 2, 3, 4, 5, 6, 7, 8, 21, 23, 32, 34, 45, 56, 64, 77, 89, 345, 432, 456, 457, 5677, 7765]
 
+var h1 = Array(PairingHeap(comparison: <, withItems: emptyArray))
+var h2 = Array(PairingHeap(comparison: <, withItems: singleArray))
+var h3 = Array(PairingHeap(comparison: <, withItems: smallArray))
+var h4 = Array(PairingHeap(comparison: <, withItems: smallArray2))
+var h5 = Array(PairingHeap(comparison: <, withItems: increasingArray))
+var h6 = Array(PairingHeap(comparison: <, withItems: decreasingArray))
+var h7 = Array(PairingHeap(comparison: <, withItems: largeArray))
+
+let pairingHeapTestCases = [
+    (h1 == [], true),
+    (h2 == singleArray, true),
+    (h3 == [1,2,3], true),
+    (h4 == [-3,1,2], true),
+    (h5 == increasingArray, true),
+    (h6 == increasingArray, true),
+    (h7 == largeArraySorted, true)
+]
+testFunction("Pairing Heap", inputs: pairingHeapTestCases)
+
+/*
+let emptyArray = [Int]()
+let singleArray = [1]
+let smallArray = [1,3,2]
+let smallArray2 = [1,-3,2]
+let increasingArray = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]
+let decreasingArray: [Int] = increasingArray.reverse()
+let largeArray = [1,2,3,6,77,8,4,23,4,5677,89,34,5,7765,345,2,34,45,56,457,6,8,5,456,432,3,4,5,56,7,64,32,1,21,1,2,3,4,45,7,3]
+let largeArraySorted = [1, 1, 1, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 6, 6, 7, 7, 8, 8, 21, 23, 32, 34, 34, 45, 45, 56, 56, 64, 77, 89, 345, 432, 456, 457, 5677, 7765]
+let largeArrayUniqueSorted = [1, 2, 3, 4, 5, 6, 7, 8, 21, 23, 32, 34, 45, 56, 64, 77, 89, 345, 432, 456, 457, 5677, 7765]
+
 // Splay Tree
 
 var h1 = Array(Heap(comparison: <, withItems: emptyArray))
@@ -229,6 +259,6 @@ let trieTestCases = [
 testFunction("Trie", inputs: trieTestCases)
 
 
-
+*/
 
 
