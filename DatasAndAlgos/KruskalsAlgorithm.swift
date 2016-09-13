@@ -24,7 +24,7 @@ extension AdjacencyListGraph {
         var resultGraph = AdjacencyListGraph()
         
         // Keep all the edges in a min heap, sorted by edge weight
-        var edgeQueue: Heap<GraphEdge<Vertex>> = Heap(comparison: <, withItems: self.edges())
+        var edgeQueue: BinaryHeap<GraphEdge<Vertex>> = BinaryHeap(comparison: <, withItems: self.edges())
         
         // Vertices not yet in our result graph
         var unaddedVertices = Set<Vertex>(self.vertices())

@@ -188,7 +188,7 @@ struct BinaryHeap<Element> {
  * Used to initialize any object taking SequenceType
  
  */
-extension Heap : SequenceType {
+extension BinaryHeap : SequenceType {
     typealias Generator = AnyGenerator<Element>
     
     func generate() -> Generator {

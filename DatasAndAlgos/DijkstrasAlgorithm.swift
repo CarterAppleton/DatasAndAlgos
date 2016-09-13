@@ -23,7 +23,7 @@ extension AdjacencyListGraph {
         }
         
         // Keep all the paths in a min heap, sorted by edge weight
-        var edgePathsMinHeap: Heap<GraphEdgePath> = Heap {
+        var edgePathsMinHeap: BinaryHeap<GraphEdgePath> = BinaryHeap {
             (edgePathA: GraphEdgePath, edgePathB: GraphEdgePath) -> Bool in
             return edgePathA.weight < edgePathB.weight
         }
