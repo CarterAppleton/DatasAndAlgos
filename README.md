@@ -7,7 +7,7 @@ I'm adding a new data structure or algorithm a day [or trying to :)]. Please ema
 - Merge Sort
  
 **Data Structures**
-- Binary Tree (Protocol) (Coming soon)
+- Tree (Protocol) (Coming soon)
  - Binary Tree (Coming soon)
  - Splay Tree
 - Heap (Protocol)
