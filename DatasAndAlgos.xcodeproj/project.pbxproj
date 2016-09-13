@@ -72,6 +72,61 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AD16A7171D879EF8002D5C00 /* Heaps */ = {
+			isa = PBXGroup;
+			children = (
+				AD16A7151D879D7C002D5C00 /* Heap.swift */,
+				ADB000261D7CE78F00E95028 /* BinaryHeap.swift */,
+				AD16A7131D878FBF002D5C00 /* PairingHeap.swift */,
+			);
+			name = Heaps;
+			sourceTree = "<group>";
+		};
+		AD16A7181D879F04002D5C00 /* Graphs */ = {
+			isa = PBXGroup;
+			children = (
+				ADB000281D7FB3E200E95028 /* AdjacencyListGraph.swift */,
+				ADB0002A1D7FC96E00E95028 /* GraphProtocol.swift */,
+			);
+			name = Graphs;
+			sourceTree = "<group>";
+		};
+		AD16A7191D879F0F002D5C00 /* Trees */ = {
+			isa = PBXGroup;
+			children = (
+				ADB000241D7CDA7A00E95028 /* SplayTree.swift */,
+				ADB000451D82642700E95028 /* Trie.swift */,
+			);
+			name = Trees;
+			sourceTree = "<group>";
+		};
+		AD16A71A1D879F23002D5C00 /* Graph Search */ = {
+			isa = PBXGroup;
+			children = (
+				ADE6D01D1D84FF8E00B7716E /* BreadthFirstSearch.swift */,
+				ADB000471D8269CE00E95028 /* DepthFirstSearch.swift */,
+				ADE6D0251D863D4200B7716E /* DijkstrasAlgorithm.swift */,
+			);
+			name = "Graph Search";
+			sourceTree = "<group>";
+		};
+		AD16A71B1D879F3E002D5C00 /* Sorting */ = {
+			isa = PBXGroup;
+			children = (
+				ADB0001E1D7CD89E00E95028 /* RadixSort.swift */,
+				ADB000201D7CDA1100E95028 /* MergeSort.swift */,
+			);
+			name = Sorting;
+			sourceTree = "<group>";
+		};
+		AD16A71C1D879F48002D5C00 /* Graph Spanning Tree */ = {
+			isa = PBXGroup;
+			children = (
+				ADB0002C1D7FE3D400E95028 /* KruskalsAlgorithm.swift */,
+			);
+			name = "Graph Spanning Tree";
+			sourceTree = "<group>";
+		};
 		ADB0000B1D7CD88E00E95028 = {
 			isa = PBXGroup;
 			children = (
@@ -94,21 +149,14 @@
 				ADB000171D7CD88E00E95028 /* main.swift */,
 				AD16A7111D866CF3002D5C00 /* TestingHelpers.swift */,
 				ADE6D0231D8506D600B7716E /* CustomExtensions.swift */,
-				ADB0001E1D7CD89E00E95028 /* RadixSort.swift */,
-				ADB000201D7CDA1100E95028 /* MergeSort.swift */,
-				ADE6D01D1D84FF8E00B7716E /* BreadthFirstSearch.swift */,
 				ADE6D01F1D85011600B7716E /* Stack.swift */,
 				ADE6D0211D85011F00B7716E /* Queue.swift */,
-				ADB000471D8269CE00E95028 /* DepthFirstSearch.swift */,
-				ADB000241D7CDA7A00E95028 /* SplayTree.swift */,
-				ADB000281D7FB3E200E95028 /* AdjacencyListGraph.swift */,
-				ADB000451D82642700E95028 /* Trie.swift */,
-				ADE6D0251D863D4200B7716E /* DijkstrasAlgorithm.swift */,
-				ADB0002A1D7FC96E00E95028 /* GraphProtocol.swift */,
-				ADB0002C1D7FE3D400E95028 /* KruskalsAlgorithm.swift */,
-				AD16A7151D879D7C002D5C00 /* Heap.swift */,
-				ADB000261D7CE78F00E95028 /* BinaryHeap.swift */,
-				AD16A7131D878FBF002D5C00 /* PairingHeap.swift */,
+				AD16A71B1D879F3E002D5C00 /* Sorting */,
+				AD16A7191D879F0F002D5C00 /* Trees */,
+				AD16A7181D879F04002D5C00 /* Graphs */,
+				AD16A71C1D879F48002D5C00 /* Graph Spanning Tree */,
+				AD16A71A1D879F23002D5C00 /* Graph Search */,
+				AD16A7171D879EF8002D5C00 /* Heaps */,
 			);
 			path = DatasAndAlgos;
 			sourceTree = "<group>";
