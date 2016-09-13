@@ -11,10 +11,10 @@ struct PairingHeap<Element> {
     /// Comparison function the heap is based on
     private var comparison: ((Element, Element) -> Bool)!
     
-    /// Element this holds, nil if this is the root
+    /// Element this holds
     private var element: Element?
     
-    /// Array used to hold sibling heaps
+    /// Array used to hold sub heaps
     private var subHeaps: [PairingHeap<Element>] = [PairingHeap<Element>]()
     
     /**
@@ -25,7 +25,7 @@ struct PairingHeap<Element> {
      An empty heap.
      
      - parameters:
-     - comparison: Whether an element is larger than the other
+        - comparison: Whether an element is larger than the other
      */
     init(comparison: ((Element, Element) -> Bool)) {
         self.comparison = comparison
@@ -39,8 +39,8 @@ struct PairingHeap<Element> {
      A heap filled with the elements in arr.
      
      - parameters:
-     - comparison: Whether an element is larger than the other
-     - arr: Elements to initialize the heap with.
+        - comparison: Whether an element is larger than the other
+        - arr: Elements to initialize the heap with.
      */
     init<S : SequenceType where S.Generator.Element == Element>(comparison: ((Element, Element) -> Bool), withItems items: S) {
         self.comparison = comparison
@@ -56,13 +56,16 @@ struct PairingHeap<Element> {
      */
     mutating func insert(item: Element) {
         
+        // If there's nothing in the heap, just add this
         guard let _ = self.element else {
             self.element = item
             return
         }
         
+        // Create a new heap with the item
         let newHeap = merge(lhs: PairingHeap(comparison: self.comparison, withItems: [item]), rhs: self)
         
+        // Swap this value with the heap
         self.element = newHeap.element
         self.subHeaps = newHeap.subHeaps
     }
@@ -100,6 +103,7 @@ struct PairingHeap<Element> {
      */
     mutating func pop() -> Element? {
         
+        // Merge all of the heaps into one
         func mergePairs(heaps: [PairingHeap<Element>]) -> PairingHeap<Element>? {
             if heaps.count == 0 {
                 return nil
@@ -111,15 +115,18 @@ struct PairingHeap<Element> {
             return h.reduce(heaps[0], combine: self.merge)
         }
         
+        // If there is no element return nil
         guard let element = self.element else {
             return nil
         }
         
+        // If there was only the head, remove the element
         guard let newHeap = mergePairs(self.subHeaps) else {
             self.element = nil
             return element
         }
         
+        // Copy over the new heap
         self.element = newHeap.element
         self.subHeaps = newHeap.subHeaps
         
@@ -158,18 +165,22 @@ struct PairingHeap<Element> {
             return returnHeap
         }
         
+        // If there is nothing in the left, return right
         guard let leftElement = lhs.element else {
             return rhs
         }
         
+        // If there is nothing in the right, return left
         guard let rightElement = rhs.element else {
             return lhs
         }
         
+        // If the left heap is less than the right, add the left as a subheap
         if comparison(leftElement,rightElement) {
             return addSubHeap(rhs, toHeap: lhs)
         }
         
+        // Otherwise do the opposite
         return addSubHeap(lhs, toHeap: rhs)
     }
     
@@ -177,7 +188,7 @@ struct PairingHeap<Element> {
 
 /**
  
- Extend Heap so it can be:
+ Extend Pairing Heap so it can be:
  * Iterated through in a For-in loop
  * Used to initialize any object taking SequenceType
  
