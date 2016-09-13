@@ -1,12 +1,12 @@
 //
-//  Heap.swift
+//  BinaryHeap.swift
 //  DatasAndAlgos
 //
 //  Created by Carter Appleton on 9/4/16.
 //  Copyright © 2016 Carter Appleton. All rights reserved.
 //
 
-struct Heap<Element> {
+struct BinaryHeap<Element> {
     
     /// Comparison function the heap is based on
     private var comparison: ((Element, Element) -> Bool)!
@@ -88,16 +88,19 @@ struct Heap<Element> {
      Top most item in the heap, if it exists. Nil if the heap is empty.
      */
     mutating func pop() -> Element? {
-        if let top = self.heap.first {
-            if self.heap.count == 1 {
-                self.heap = [Element]()
-            } else {
-                self.heap[0] = self.heap.removeLast()
-                self.percolateDown(0)
-            }
-            return top
+        
+        guard let top = self.heap.first else {
+            return nil
         }
-        return nil
+        
+        if self.heap.count == 1 {
+            self.heap = [Element]()
+        } else {
+            self.heap[0] = self.heap.removeLast()
+            self.percolateDown(0)
+        }
+        
+        return top
     }
     
     /**
